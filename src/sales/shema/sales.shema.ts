@@ -49,8 +49,8 @@ export class Sales {
   @Prop()
   description: string;
 
-  @Prop()
-  picture: string;
+  @Prop([String])
+  picture: string[];
 }
 
 export const SaleSchema = SchemaFactory.createForClass(Sales);

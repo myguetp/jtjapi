@@ -1,26 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStratumDto } from './dto/create-stratum.dto';
-import { UpdateStratumDto } from './dto/update-stratum.dto';
+import { Stratum, StratumDocument } from './shema/stratum.shema';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class StratumService {
-  create(createStratumDto: CreateStratumDto) {
-    return 'This action adds a new stratum';
+  constructor(
+    @InjectModel(Stratum.name) private stratumModule: Model<StratumDocument>,
+  ) {}
+
+  async create(createStratumDto: CreateStratumDto) {
+    const ofertCrate = await this.stratumModule.create(createStratumDto);
+    return ofertCrate;
   }
 
-  findAll() {
-    return `This action returns all stratum`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} stratum`;
-  }
-
-  update(id: number, updateStratumDto: UpdateStratumDto) {
-    return `This action updates a #${id} stratum`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} stratum`;
+  async findAll() {
+    const list = await this.stratumModule.find({});
+    return list;
   }
 }

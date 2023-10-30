@@ -1,6 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateSaleDto } from './create-sale.dto';
 import { IsNotEmpty, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   @IsString()
@@ -32,5 +33,6 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   area: string;
   @IsNotEmpty()
   description: string;
-  picture: string;
+  @ApiProperty({ type: [String] })
+  picture: string[];
 }

@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateSaleDto {
@@ -30,5 +31,6 @@ export class CreateSaleDto {
   area: string;
   @IsNotEmpty()
   description: string;
-  picture: string;
+  @ApiProperty({ type: [String] })
+  picture: string[];
 }

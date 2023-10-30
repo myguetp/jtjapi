@@ -1,1 +1,4 @@
-export class CreateAntiquityDto {}
+export class CreateAntiquityDto {
+  id: string;
+  name: string;
+}

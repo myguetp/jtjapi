@@ -1,1 +1,4 @@
-export class CreateStratumDto {}
+export class CreateStratumDto {
+  id: string;
+  name: string;
+}

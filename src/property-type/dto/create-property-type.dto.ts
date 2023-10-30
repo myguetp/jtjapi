@@ -1,1 +1,4 @@
-export class CreatePropertyTypeDto {}
+export class CreatePropertyTypeDto {
+  id: string;
+  name: string;
+}

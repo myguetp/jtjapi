@@ -11,6 +11,8 @@ import { OfertModule } from './ofert/ofert.module';
 import { StratumModule } from './stratum/stratum.module';
 import { PropertyTypeModule } from './property-type/property-type.module';
 import { AntiquityModule } from './antiquity/antiquity.module';
+import { RoomModule } from './room/room.module';
+import { RestroomModule } from './restroom/restroom.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { AntiquityModule } from './antiquity/antiquity.module';
     StratumModule,
     PropertyTypeModule,
     AntiquityModule,
+    RoomModule,
+    RestroomModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -49,8 +49,8 @@ export class Leases {
   @Prop()
   description: string;
 
-  @Prop()
-  picture: string;
+  @Prop([String])
+  picture: string[];
 }
 
 export const LeasesSchema = SchemaFactory.createForClass(Leases);

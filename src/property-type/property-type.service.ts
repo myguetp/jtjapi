@@ -1,26 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePropertyTypeDto } from './dto/create-property-type.dto';
-import { UpdatePropertyTypeDto } from './dto/update-property-type.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import {
+  PropertyType,
+  PropertyTypeDocument,
+} from './shema/property-type.shema';
 
 @Injectable()
 export class PropertyTypeService {
-  create(createPropertyTypeDto: CreatePropertyTypeDto) {
-    return 'This action adds a new propertyType';
+  constructor(
+    @InjectModel(PropertyType.name)
+    private PropertyTypeModule: Model<PropertyTypeDocument>,
+  ) {}
+
+  async create(createPropertyTypeDto: CreatePropertyTypeDto) {
+    const ofertCrate = await this.PropertyTypeModule.create(
+      createPropertyTypeDto,
+    );
+    return ofertCrate;
   }
 
-  findAll() {
-    return `This action returns all propertyType`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} propertyType`;
-  }
-
-  update(id: number, updatePropertyTypeDto: UpdatePropertyTypeDto) {
-    return `This action updates a #${id} propertyType`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} propertyType`;
+  async findAll() {
+    const list = await this.PropertyTypeModule.find({});
+    return list;
   }
 }

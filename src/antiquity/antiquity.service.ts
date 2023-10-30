@@ -1,26 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { Antiquity } from './entities/antiquity.entity';
+import { AntiquityDocument } from './shema/antiquity.shema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateAntiquityDto } from './dto/create-antiquity.dto';
-import { UpdateAntiquityDto } from './dto/update-antiquity.dto';
 
 @Injectable()
 export class AntiquityService {
-  create(createAntiquityDto: CreateAntiquityDto) {
-    return 'This action adds a new antiquity';
+  constructor(
+    @InjectModel(Antiquity.name)
+    private antiquityModule: Model<AntiquityDocument>,
+  ) {}
+
+  async create(createAntiquityDto: CreateAntiquityDto) {
+    const ofertCrate = await this.antiquityModule.create(createAntiquityDto);
+    return ofertCrate;
   }
 
-  findAll() {
-    return `This action returns all antiquity`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} antiquity`;
-  }
-
-  update(id: number, updateAntiquityDto: UpdateAntiquityDto) {
-    return `This action updates a #${id} antiquity`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} antiquity`;
+  async findAll() {
+    const list = await this.antiquityModule.find({});
+    return list;
   }
 }

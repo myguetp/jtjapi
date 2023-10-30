@@ -7,6 +7,6 @@ export class AppService {
   }
 
   getUsers(): string[] {
-    return ['dd', 'ss', 'll'];
+    return [];
   }
 }

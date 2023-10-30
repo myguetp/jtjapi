@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { PropertyTypeService } from './property-type.service';
 import { CreatePropertyTypeDto } from './dto/create-property-type.dto';
-import { UpdatePropertyTypeDto } from './dto/update-property-type.dto';
 
 @Controller('property-type')
 export class PropertyTypeController {
@@ -15,20 +14,5 @@ export class PropertyTypeController {
   @Get()
   findAll() {
     return this.propertyTypeService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.propertyTypeService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePropertyTypeDto: UpdatePropertyTypeDto) {
-    return this.propertyTypeService.update(+id, updatePropertyTypeDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.propertyTypeService.remove(+id);
   }
 }

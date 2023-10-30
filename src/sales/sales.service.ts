@@ -11,8 +11,15 @@ export class SalesService {
   constructor(@InjectModel(Sales.name) private salesModule:Model<SalesDocument>) { }
 
   async create(createSaleDto: CreateSaleDto) {
-    const saleCrate = await this.salesModule.create(createSaleDto)
-    return saleCrate
+    const { picture, ...rest } = createSaleDto;
+    const picturesBuffer = picture.map((base64String: string) => Buffer.from(base64String, 'base64'));
+
+    const saleCrate = await this.salesModule.create({
+      ...rest,
+      picture: picturesBuffer,
+    });
+
+    return saleCrate;
   }
 
   async findAll() {

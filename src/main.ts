@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as dotenv from 'dotenv';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  dotenv.config();
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();
@@ -14,12 +16,23 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('sales')
     .addTag('leases')
+    .addTag('ofert')
+    .addTag('property-type')
+    .addTag('rent')
+    .addTag('restroom')
+    .addTag('room')
+    .addTag('service-type')
+    .addTag('speciallity')
+    .addTag('stratum')
+    .addTag('antiquity')
+    .addTag('auth')
+    .addTag('users')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('documentacion', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3001);
+  await app.listen(process.env.PORT);
 }
 bootstrap();

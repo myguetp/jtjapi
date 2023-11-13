@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateLeaseDto {
@@ -29,5 +30,6 @@ export class CreateLeaseDto {
   area: string;
   @IsNotEmpty()
   description: string;
-  picture: string;
+  @ApiProperty({ type: [String] })
+  picture: string[];
 }

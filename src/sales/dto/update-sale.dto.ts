@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateSaleDto } from './create-sale.dto';
 import { IsNotEmpty, IsString } from 'class-validator';
@@ -6,15 +7,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   @IsString()
   @IsNotEmpty()
-  name: string;
-  @IsNotEmpty()
   ofert: string;
-  @IsNotEmpty()
-  phone: string;
-  @IsNotEmpty()
-  email: string;
-  @IsNotEmpty()
-  city: string;
   @IsNotEmpty()
   neigborhood: string;
   @IsNotEmpty()
@@ -25,6 +18,10 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   breed: string;
   @IsNotEmpty()
   price: string;
+  @IsNotEmpty()
+  room: string;
+  @IsNotEmpty()
+  restroom: string;
   @IsNotEmpty()
   age: string;
   @IsNotEmpty()

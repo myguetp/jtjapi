@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreatePropertyTypeDto } from './dto/create-property-type.dto';
 import { InjectModel } from '@nestjs/mongoose';

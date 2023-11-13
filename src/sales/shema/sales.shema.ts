@@ -7,20 +7,9 @@ export type SalesDocument = Sales & Document;
 @Schema()
 export class Sales {
   @Prop()
-  name: string;
-
+  isUser: string;
   @Prop()
   ofert: string;
-
-
-  @Prop()
-  phone: string;
-
-  @Prop({unique:true})
-  email: string;
-
-  @Prop()
-  city: string;
 
   @Prop()
   neigborhood: string;
@@ -36,6 +25,12 @@ export class Sales {
 
   @Prop()
   price: string;
+
+  @Prop()
+  room: string;
+
+  @Prop()
+  restroom: string;
 
   @Prop()
   age: string;

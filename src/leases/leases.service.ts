@@ -12,8 +12,17 @@ export class LeasesService {
   ) {}
 
   async create(createLeaseDto: CreateLeaseDto) {
-    const leasesCreate = await this.leasesModule.create(createLeaseDto);
-    return leasesCreate;
+    const { picture, ...rest } = createLeaseDto;
+    const picturesBuffer = picture.map((base64String: string) =>
+      Buffer.from(base64String, 'base64'),
+    );
+
+    const saleCrate = await this.leasesModule.create({
+      ...rest,
+      picture: picturesBuffer,
+    });
+
+    return saleCrate;
   }
 
   async findAll() {

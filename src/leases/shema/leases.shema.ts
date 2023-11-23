@@ -7,20 +7,9 @@ export type LeasesDocument = Leases & Document;
 @Schema()
 export class Leases {
   @Prop()
-  name: string;
-
+  isUser: string;
   @Prop()
   ofert: string;
-
-
-  @Prop()
-  phone: string;
-
-  @Prop({unique:true})
-  email: string;
-
-  @Prop()
-  city: string;
 
   @Prop()
   neigborhood: string;
@@ -38,6 +27,12 @@ export class Leases {
   price: string;
 
   @Prop()
+  room: string;
+
+  @Prop()
+  restroom: string;
+
+  @Prop()
   age: string;
 
   @Prop()
@@ -50,7 +45,7 @@ export class Leases {
   description: string;
 
   @Prop([String])
-  picture: string[];
+  picture: string[]; 
 }
 
 export const LeasesSchema = SchemaFactory.createForClass(Leases);

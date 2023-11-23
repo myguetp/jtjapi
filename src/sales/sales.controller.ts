@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Controller,
   Get,
@@ -6,39 +7,53 @@ import {
   Put,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFiles,
+  InternalServerErrorException,
+  Logger,
 } from '@nestjs/common';
 import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { AnyFilesInterceptor } from '@nestjs/platform-express';
 
-@ApiTags('sales')
 @Controller('sales')
 export class SalesController {
   constructor(private readonly salesService: SalesService) {}
 
-  @Post()
-  create(@Body() createSaleDto: CreateSaleDto) {
-    return this.salesService.create(createSaleDto);
-  }
+  private readonly logger = new Logger('SalesController');
 
-  @Get()
-  findAll() {
-    return this.salesService.findAll();
+@Post('upload')
+@UseInterceptors(AnyFilesInterceptor())
+create(@Body() createSaleDto: CreateSaleDto, @UploadedFiles() files:  Array<Express.Multer.File>) {
+  try {
+    createSaleDto.filename = files.map(e => e.filename);
+    console.log(createSaleDto);
+    const createdSale = this.salesService.create(createSaleDto, files);
+    return createdSale;
+  } catch (error) {
+    this.logger.error(`Error creating sale: ${error.message}`);
+    throw new InternalServerErrorException('Error creating sale');
   }
+}
 
-  @Get(':id')
-  findOne(@Param('id') _id: string) {
-    return this.salesService.findOne(_id);
-  }
+@Get()
+findAll() {
+  return this.salesService.findAll();
+}
 
-  @Put(':id')
-  update(@Param('id') _id: string, @Body() updateSaleDto: UpdateSaleDto) {
-    return this.salesService.update(_id, updateSaleDto);
-  }
+@Get(':id')
+findOne(@Param('id') _id: string) {
+  return this.salesService.findOne(_id);
+}
 
-  @Delete(':id')
-  delete(@Param('id') _id: string) {
-    return this.salesService.delete(_id);
-  }
+@Put(':id')
+update(@Param('id') _id: string, @Body() updateSaleDto: UpdateSaleDto) {
+  return this.salesService.update(_id, updateSaleDto);
+}
+
+@Delete(':id')
+delete(@Param('id') _id: string) {
+  return this.salesService.delete(_id);
+}
 }

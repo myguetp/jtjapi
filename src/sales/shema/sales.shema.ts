@@ -7,7 +7,7 @@ export type SalesDocument = Sales & Document;
 @Schema()
 export class Sales {
   @Prop()
-  isUser: string;
+  register: string;
   @Prop()
   ofert: string;
 
@@ -45,7 +45,7 @@ export class Sales {
   description: string;
 
   @Prop([String])
-  picture: string[];
+  filename: string[]; 
 }
 
-export const SaleSchema = SchemaFactory.createForClass(Sales);
+export const SalesSchema = SchemaFactory.createForClass(Sales);

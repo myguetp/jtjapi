@@ -1,17 +1,13 @@
+/* eslint-disable prettier/prettier */
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateLeaseDto {
+  @IsString()
   @IsNotEmpty()
-  name: string;
+  idUser: string;
   @IsNotEmpty()
   ofert: string;
-  @IsNotEmpty()
-  phone: string;
-  @IsNotEmpty()
-  email: string;
-  @IsNotEmpty()
-  city: string;
   @IsNotEmpty()
   neigborhood: string;
   @IsNotEmpty()
@@ -22,6 +18,10 @@ export class CreateLeaseDto {
   breed: string;
   @IsNotEmpty()
   price: string;
+  @IsNotEmpty()
+  room: string;
+  @IsNotEmpty()
+  restroom: string;
   @IsNotEmpty()
   age: string;
   @IsNotEmpty()

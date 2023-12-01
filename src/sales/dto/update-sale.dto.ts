@@ -31,5 +31,8 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   @IsNotEmpty()
   description: string;
   @IsNotEmpty()
-  filename: string[];
+  filename: {
+    path: string;
+    name: string;
+  }[]
 }

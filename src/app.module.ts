@@ -25,9 +25,9 @@ import * as path from 'path';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017/demo'),
     MulterModule.register({
-      dest: path.join(__dirname, '..', 'uploads'), 
+      dest: path.join(__dirname, '..', 'uploads'),
     }),
     LeasesModule,
     RentModule,

@@ -16,6 +16,9 @@ import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
+import { binary } from 'joi';
+const fs = require('fs');
+
 
 @Controller('sales')
 export class SalesController {
@@ -24,13 +27,31 @@ export class SalesController {
   private readonly logger = new Logger('SalesController');
 
 @Post('upload')
-@UseInterceptors(AnyFilesInterceptor())
-create(@Body() createSaleDto: CreateSaleDto, @UploadedFiles() files:  Array<Express.Multer.File>) {
+create(@Body() createSaleDto: CreateSaleDto) {
+
+  
   try {
-    createSaleDto.filename = files.map(e => e.filename);
-    console.log(createSaleDto);
-    const createdSale = this.salesService.create(createSaleDto, files);
-    return createdSale;
+
+    const binaryFiles = createSaleDto.filename.map(e => fs.readFileSync(e.path));
+
+    binaryFiles.forEach((e, i) => {
+      fs.writeFileSync(`./upload/${createSaleDto.filename[i].name}`, e, 'binary', (err) => {
+        if (err) throw err;
+      });
+
+    });
+  
+    console.log(binaryFiles);
+
+
+    //Get Bynary files images
+
+
+
+    // createSaleDto.filename = files.map(e => e.filename);
+    // console.log(createSaleDto);
+    // const createdSale = this.salesService.create(createSaleDto, files);
+    // return createdSale;
   } catch (error) {
     this.logger.error(`Error creating sale: ${error.message}`);
     throw new InternalServerErrorException('Error creating sale');

@@ -12,10 +12,10 @@ export class SalesService {
     @InjectModel(Sales.name) private salesModule: Model<SalesDocument>,
   ) {}
 
-  async create(createSaleDto: CreateSaleDto, files: Express.Multer.File[]) {
+  async create(createSaleDto: CreateSaleDto) {
     try {
       const sale = new this.salesModule(createSaleDto);
-      sale.filename = files.map((file) => file.originalname);
+      console.log(createSaleDto);
 
       const createdSale = await sale.save();
 

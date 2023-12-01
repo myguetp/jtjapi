@@ -45,7 +45,10 @@ export class Sales {
   description: string;
 
   @Prop([String])
-  filename: string[]; 
+  filename: {
+    name:string;
+    path: string;
+  }[]
 }
 
 export const SalesSchema = SchemaFactory.createForClass(Sales);

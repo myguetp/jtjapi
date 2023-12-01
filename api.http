@@ -1,0 +1,39 @@
+### Upload sales uplaod 
+
+POST http://localhost:3001/sales/upload
+Content-Type: application/json
+
+{
+    "register": "1",
+    "ofert":"1",
+    "neigborhood":"1",
+    "property":"1",
+    "stratum":"1",
+    "breed":"1",
+    "price":"1",
+    "room":"1",
+    "restroom":"1",
+    "age":"1",
+    "administration":"1",
+    "area":"1",
+    "description":"1",
+    "filename":[
+       {
+        "name":"celula.jpg",
+        "path":"C:/Users/YEIMAR/Downloads/celula.jpg"
+       },
+       {
+        "name":"whatsapp.jpg",
+        "path":"C:/Users/YEIMAR/Downloads/WhatsApp Image 2023-11-06 at 13.16.05_7e2158d5.jpg"
+       },
+       {
+        "name":"document.pdf",
+        "path":"C:/Users/YEIMAR/Downloads/Manual-de-Usuario.pdf"
+       }
+    ]
+
+    
+
+}
+
+

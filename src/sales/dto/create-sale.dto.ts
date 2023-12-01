@@ -29,5 +29,8 @@ export class CreateSaleDto {
   @IsNotEmpty()
   description: string;
   @IsNotEmpty()
-  filename: string[];
+  filename: {
+    path: string;
+    name: string;
+  }[]
 }

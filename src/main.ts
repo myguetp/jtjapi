@@ -4,10 +4,15 @@ import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import * as express from 'express';
+import { join } from 'path';
 
 async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AppModule);
+
+  app.use('/upload', express.static(join(__dirname, '..', 'upload')));
+
 
   app.enableCors();
 
@@ -34,6 +39,6 @@ async function bootstrap() {
   SwaggerModule.setup('documentacion', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(process.env.PORT || '3001');
+  await app.listen(process.env.PORT);
 }
 bootstrap();

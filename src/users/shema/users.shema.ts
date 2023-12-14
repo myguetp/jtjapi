@@ -14,7 +14,7 @@ export class User {
   city: string;
   @Prop()
   phone: string;
-  @Prop()
+  @Prop({ unique: true })
   email: string;
   @Prop()
   password: string;

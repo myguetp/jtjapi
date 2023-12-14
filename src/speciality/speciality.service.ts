@@ -1,26 +1,23 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateSpecialityDto } from './dto/create-speciality.dto';
-import { UpdateSpecialityDto } from './dto/update-speciality.dto';
+import { Speciality, SpecialityDocument } from './shema/specialite.shema';
 
 @Injectable()
 export class SpecialityService {
-  create(createSpecialityDto: CreateSpecialityDto) {
-    return 'This action adds a new speciality';
+  constructor(
+    @InjectModel(Speciality.name) private specialityModule: Model<SpecialityDocument>,
+  ) {}
+
+  async create(createSpecialityDto: CreateSpecialityDto) {
+    const ofertCrate = await this.specialityModule.create(createSpecialityDto);
+    return ofertCrate;
   }
 
-  findAll() {
-    return `This action returns all speciality`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} speciality`;
-  }
-
-  update(id: number, updateSpecialityDto: UpdateSpecialityDto) {
-    return `This action updates a #${id} speciality`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} speciality`;
+  async findAll() {
+    const list = await this.specialityModule.find({});
+    return list;
   }
 }

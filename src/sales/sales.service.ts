@@ -15,29 +15,15 @@ export class SalesService {
   async create(createSaleDto: CreateSaleDto) {
     try {
       const sale = new this.salesModule(createSaleDto);
-      console.log(createSaleDto);
 
       const createdSale = await sale.save();
 
-      console.log('Venta creada:', createdSale);
       return createdSale;
     } catch (error) {
       console.error('Error al crear la venta:', error.message);
       throw error;
     }
   }
-
-  // async create(createSaleDto: CreateSaleDto) {
-  //   const { picture, ...rest } = createSaleDto;
-  //   const picturesBuffer = picture.map((base64String: string) => Buffer.from(base64String, 'base64'));
-
-  //   const saleCrate = await this.salesModule.create({
-  //     ...rest,
-  //     picture: picturesBuffer,
-  //   });
-
-  //   return saleCrate;
-  // }
 
   async findAll() {
     const list = await this.salesModule.find({});

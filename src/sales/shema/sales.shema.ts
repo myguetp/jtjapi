@@ -5,6 +5,18 @@ import { Document } from 'mongoose';
 export type SalesDocument = Sales & Document;
 
 @Schema()
+export class File {
+  @Prop()
+  fieldname: string;
+  @Prop()
+  originalname: string;
+  @Prop()
+  encoding: string;
+  @Prop()
+  mimetype: string;
+}
+
+@Schema()
 export class Sales {
   @Prop()
   register: string;
@@ -44,11 +56,14 @@ export class Sales {
   @Prop()
   description: string;
 
-  @Prop([String])
-  filename: {
-    name:string;
-    path: string;
-  }[]
+  @Prop()
+  createdAt: number;
+
+  @Prop()
+  finnallyAt: number
+
+  @Prop()
+  picture: File[];
 }
 
 export const SalesSchema = SchemaFactory.createForClass(Sales);

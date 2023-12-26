@@ -4,28 +4,27 @@ POST http://localhost:3001/sales/upload
 Content-Type: application/json
 
 {
-    "register": "657509efb0c5853ab661195e",
-    "ofert":"1",
-    "neigborhood":"1",
-    "property":"1",
-    "stratum":"1",
-    "breed":"1",
-    "price":"1",
-    "room":"1",
-    "restroom":"1",
-    "age":"1",
-    "administration":"1",
-    "area":"1",
-    "description":"1",
-    "picture":[
-       {
-         "name": "carro",
-        "filename": "carro.jpg",
-        "type": "image/jpeg",
-        "value": "[carro.jpg]"
-       }
-    ]
-
+  "register": "657509efb0c5853ab661195e",
+  "ofert": "1",
+  "neigborhood": "1",
+  "property": "1",
+  "stratum": "1",
+  "breed": "1",
+  "price": "1",
+  "room": "1",
+  "restroom": "1",
+  "age": "1",
+  "administration": "1",
+  "area": "1",
+  "description": "1",
+  "picture": [
+    {
+      "fieldname": "carro",
+      "originalname": "carro.jpg",
+      "encoding": "base64",
+      "mimetype": "image/jpeg"
+    }
+  ]
 }
 
 

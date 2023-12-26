@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, UseInterceptors, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseInterceptors, Put, Delete, Param } from '@nestjs/common';
 import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
@@ -30,7 +30,6 @@ export class SalesController {
   async create(@Body() createSaleDto: CreateSaleDto) {
     createSaleDto.picture = this.mapFilesInfo(createSaleDto.picture);
     
-    console.log('Received DTO:', createSaleDto);
     return this.salesService.create(createSaleDto);
   }
 
@@ -48,9 +47,23 @@ export class SalesController {
     return this.salesService.findAll();
   }
 
+  @Get('byAllData/:stratum?/:room?/:restroom?')
+  findAllByAllMethods(
+    @Param('stratum') stratum?: string,
+    @Param('room') room?: number,
+    @Param('restroom') restroom?: number,
+  ) {
+    return this.salesService.findAllByAllMethods(stratum, room, restroom);
+  }
+
   @Get(':id')
   findOne(@Param('id') _id: string) {
     return this.salesService.findOne(_id);
+  }
+
+  @Get('byProperty/:property')
+  findAllByProperty(@Param('property') property: string) {
+    return this.salesService.findAllByProperty(property);
   }
 
   @Put(':id')

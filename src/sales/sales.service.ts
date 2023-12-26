@@ -30,9 +30,33 @@ export class SalesService {
     return list;
   }
 
+  async findAllByAllMethods(stratum?: string, room?: number, restroom?: number) {
+    const query: any = {};
+
+    if (stratum !== undefined) {
+      query.stratum = stratum;
+    }
+
+    if (room !== undefined) {
+      query.room = room;
+    }
+
+    if (restroom !== undefined) {
+      query.restroom = restroom;
+    }
+
+    const list = await this.salesModule.find(query);
+    return list;
+  }
+
   async findOne(_id: string) {
-    const findone = await this.salesModule.findOne({ where: { _id } });
+    const findone = await this.salesModule.findById(_id);
     return findone;
+  }
+
+  async findAllByProperty(property: string) {
+    const list = await this.salesModule.find({ property });
+    return list;
   }
 
   async update(_id: string, updateSaleDto: UpdateSaleDto) {

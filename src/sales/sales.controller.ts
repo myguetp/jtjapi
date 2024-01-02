@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, UseInterceptors, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseInterceptors, Put, Delete, Param, Query } from '@nestjs/common';
 import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
@@ -42,20 +42,23 @@ export class SalesController {
     }));
   }
 
-  @Get()
-  findAll() {
-    return this.salesService.findAll();
-  }
-
-  @Get('byAllData/:stratum?/:room?/:restroom?')
+  @Get('byAllData')
   findAllByAllMethods(
-    @Param('stratum') stratum?: string,
-    @Param('room') room?: number,
-    @Param('restroom') restroom?: number,
-  ) {
-    return this.salesService.findAllByAllMethods(stratum, room, restroom);
-  }
+  @Query('stratum') stratum?: string,
+  @Query('room') room?: string,
+  @Query('restroom') restroom?: string,
+  @Query('age') age?: string,
+  @Query('breed') breed?: string,
+  @Query('minPrice') minPrice?: number,
+  @Query('maxPrice') maxPrice?: number,
+  @Query('minArea') minArea?: number,
+  @Query('maxArea') maxArea?: number
 
+) {
+  return this.salesService.findAllByAllMethods(stratum, room, restroom, age, breed, minPrice, maxPrice, minArea, maxArea);
+}
+
+  
   @Get(':id')
   findOne(@Param('id') _id: string) {
     return this.salesService.findOne(_id);

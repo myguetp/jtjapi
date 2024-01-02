@@ -36,7 +36,7 @@ export class Sales {
   breed: string;
 
   @Prop()
-  price: string;
+  price: number;
 
   @Prop()
   room: string;
@@ -51,7 +51,7 @@ export class Sales {
   administration: string;
 
   @Prop()
-  area: string;
+  area: number;
 
   @Prop()
   description: string;

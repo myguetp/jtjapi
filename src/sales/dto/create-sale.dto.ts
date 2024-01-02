@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, IsString, Max, Min, ValidateNested } from 'class-validator';
 
 export class File {
   fieldname: string;
@@ -30,8 +30,10 @@ export class CreateSaleDto {
   breed: string;
   
   @IsNotEmpty()
-  price: string;
-  
+  @Min(0)
+  @Max(9999999)
+  price: number
+
   @IsNotEmpty()
   room: string;
   
@@ -45,7 +47,9 @@ export class CreateSaleDto {
   administration: string;
   
   @IsNotEmpty()
-  area: string;
+  @Min(0)
+  @Max(9999999)
+  area: number;
   
   @IsNotEmpty()
   description: string;

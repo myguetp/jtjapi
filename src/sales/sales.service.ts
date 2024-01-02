@@ -25,27 +25,64 @@ export class SalesService {
     }
   }
 
-  async findAll() {
-    const list = await this.salesModule.find({});
-    return list;
-  }
-
-  async findAllByAllMethods(stratum?: string, room?: number, restroom?: number) {
+  async findAllByAllMethods(
+    stratum?: string,
+    room?: string,
+    restroom?: string,
+    age?: string,
+    breed?: string,
+    minPrice?: number,
+    maxPrice?: number,
+    minArea?: number,
+    maxArea?: number
+  ) {
     const query: any = {};
-
+  
     if (stratum !== undefined) {
       query.stratum = stratum;
     }
-
+  
     if (room !== undefined) {
       query.room = room;
     }
-
+  
     if (restroom !== undefined) {
       query.restroom = restroom;
     }
+  
+    if (age !== undefined) {
+      query.age = age;
+    }
+  
+    if (breed !== undefined) {
+      query.breed = breed;
+    }
+    
+    if (minPrice !== undefined) {
+      query.price = { $gte: minPrice };
+    }
+  
+    if (maxPrice !== undefined) {
+      if (query.price) {
+        query.price.$lte = maxPrice;
+      } else {
+        query.price = { $lte: maxPrice };
+      }
+    }
 
-    const list = await this.salesModule.find(query);
+    if (minArea !== undefined) {
+      query.area = { $gte: minArea };
+    }
+
+    if (maxArea !== undefined) {
+      if (query.area) {
+        query.area.$lte = maxArea;
+      } else {
+        query.area = { $lte: maxArea };
+      }
+    }
+
+    const list = await this.salesModule.find(query).exec();
     return list;
   }
 

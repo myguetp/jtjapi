@@ -33,7 +33,7 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   breed: string;
   
   @IsNotEmpty()
-  price: string;
+  price: number
   
   @IsNotEmpty()
   room: string;
@@ -48,7 +48,7 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   administration: string;
   
   @IsNotEmpty()
-  area: string;
+  area: number;
   
   @IsNotEmpty()
   description: string;

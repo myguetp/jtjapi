@@ -9,7 +9,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class RoomController {
   constructor(private readonly roomService: RoomService) {}
 
-  @Post()
+  @Post('creationRoom')
   create(@Body() createRoomDto: CreateRoomDto) {
     return this.roomService.create(createRoomDto);
   }

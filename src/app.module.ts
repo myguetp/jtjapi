@@ -22,6 +22,8 @@ import { AuthModule } from './auth/auth.module'
 import { UsersModule } from './users/users.module'
 import { SalesModule } from './sales/sales.module'
 import { MailerModule } from './mailer/mailer.module';
+import { InfoClientModule } from './info-client/info-client.module';
+import { ParkingModule } from './parking/parking.module';
 import * as path from 'path'
 
 @Module({
@@ -45,6 +47,8 @@ import * as path from 'path'
     UsersModule,
     SalesModule,
     MailerModule,
+    InfoClientModule,
+    ParkingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

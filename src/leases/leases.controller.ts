@@ -1,25 +1,55 @@
+/* eslint-disable prettier/prettier */
 import {
   Controller,
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
+  UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { LeasesService } from './leases.service';
 import { CreateLeaseDto } from './dto/create-lease.dto';
 import { UpdateLeaseDto } from './dto/update-lease.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { diskStorage } from 'multer';
+import { File } from './dto/create-lease.dto';
+import { extname } from 'path';
+import { FilesInterceptor } from '@nestjs/platform-express/multer';
 
-@ApiTags('leases')
+const storage = diskStorage({
+  destination: './uploads',
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const extension = extname(file.originalname);
+    cb(null, `${file.fieldname}-${uniqueSuffix}${extension}`);
+  },
+});
+
 @Controller('leases')
 export class LeasesController {
   constructor(private readonly leasesService: LeasesService) {}
 
-  @Post()
-  create(@Body() createLeaseDto: CreateLeaseDto) {
-    return this.leasesService.create(createLeaseDto);
+  @Post('uploadcrate')
+  @UseInterceptors(
+    FilesInterceptor('picture', 10, {
+      storage: storage,
+    }),
+  )
+  async create(@Body() leasesService: CreateLeaseDto) {
+    leasesService.picture = this.mapFilesInfo(leasesService.picture);
+
+    return this.leasesService.create(leasesService);
+  }
+
+  private mapFilesInfo(pictures: File[]): File[] {
+    return pictures.map((file) => ({
+      fieldname: file.fieldname,
+      originalname: file.originalname,
+      encoding: file.encoding,
+      mimetype: file.mimetype,
+    }));
   }
 
   @Get()
@@ -27,18 +57,43 @@ export class LeasesController {
     return this.leasesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.leasesService.findOne(+id);
+  @Get('byAllData')
+  findAllByAllMethods(
+    @Query('stratum') stratum?: string,
+    @Query('room') room?: string,
+    @Query('restroom') restroom?: string,
+    @Query('age') age?: string,
+    @Query('breed') breed?: string,
+    @Query('minPrice') minPrice?: number,
+    @Query('maxPrice') maxPrice?: number,
+    @Query('minArea') minArea?: number,
+    @Query('maxArea') maxArea?: number,
+  ) {
+    return this.leasesService.findAllByAllMethods(
+      stratum,
+      room,
+      restroom,
+      age,
+      breed,
+      minPrice,
+      maxPrice,
+      minArea,
+      maxArea,
+    );
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLeaseDto: UpdateLeaseDto) {
-    return this.leasesService.update(+id, updateLeaseDto);
+  @Get(':id')
+  findOne(@Param('id') _id: string) {
+    return this.leasesService.findOne(_id);
+  }
+
+  @Put(':id')
+  update(@Param('id') _id: string, @Body() updateLeaseDto: UpdateLeaseDto) {
+    return this.leasesService.update(_id, updateLeaseDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.leasesService.remove(+id);
+  delete(@Param('id') _id: string) {
+    return this.leasesService.delete(_id);
   }
 }

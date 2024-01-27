@@ -48,14 +48,15 @@ export class SalesController {
   @Query('room') room?: string,
   @Query('restroom') restroom?: string,
   @Query('age') age?: string,
-  @Query('breed') breed?: string,
+  @Query('parking') parking?: string,
+  @Query('property') property?: string,
   @Query('minPrice') minPrice?: number,
   @Query('maxPrice') maxPrice?: number,
   @Query('minArea') minArea?: number,
   @Query('maxArea') maxArea?: number
 
 ) {
-  return this.salesService.findAllByAllMethods(stratum, room, restroom, age, breed, minPrice, maxPrice, minArea, maxArea);
+  return this.salesService.findAllByAllMethods(stratum, room, restroom, age, parking, property, minPrice, maxPrice, minArea, maxArea);
 }
 
   

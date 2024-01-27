@@ -18,10 +18,12 @@ export class File {
 
 @Schema()
 export class Sales {
-  @Prop()
-  register: string;
+
   @Prop()
   ofert: string;
+
+  @Prop()
+  parking: string;
 
   @Prop()
   neigborhood: string;
@@ -31,9 +33,6 @@ export class Sales {
 
   @Prop()
   stratum: string;
-
-  @Prop()
-  breed: string;
 
   @Prop()
   price: number;
@@ -60,7 +59,7 @@ export class Sales {
   createdAt: number;
 
   @Prop()
-  finnallyAt: number
+  finnallyAt: number;
 
   @Prop()
   picture: File[];

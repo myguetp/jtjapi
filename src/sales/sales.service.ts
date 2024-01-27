@@ -30,7 +30,8 @@ export class SalesService {
     room?: string,
     restroom?: string,
     age?: string,
-    breed?: string,
+    parking?: string,
+    property?: string,
     minPrice?: number,
     maxPrice?: number,
     minArea?: number,
@@ -53,14 +54,20 @@ export class SalesService {
     if (age !== undefined) {
       query.age = age;
     }
-  
-    if (breed !== undefined) {
-      query.breed = breed;
+
+    if (parking !== undefined) {
+      query.parking = parking;
     }
-    
+
+    if (property !== undefined) {
+      query.property = property;
+    }
+  
+       
     if (minPrice !== undefined) {
       query.price = { $gte: minPrice };
     }
+
   
     if (maxPrice !== undefined) {
       if (query.price) {

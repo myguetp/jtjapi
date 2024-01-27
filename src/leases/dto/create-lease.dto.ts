@@ -18,6 +18,9 @@ export class CreateLeaseDto {
   ofert: string;
   
   @IsNotEmpty()
+  parking: string;
+
+  @IsNotEmpty()
   neigborhood: string;
   
   @IsNotEmpty()
@@ -26,9 +29,7 @@ export class CreateLeaseDto {
   @IsNotEmpty()
   stratum: string;
   
-  @IsNotEmpty()
-  breed: string;
-  
+ 
   @IsNotEmpty()
   @Min(0)
   @Max(9999999)

@@ -13,12 +13,12 @@ export class File {
 
 
 export class UpdateSaleDto extends PartialType(CreateSaleDto) {
-  @IsString()
-  @IsNotEmpty()
-  register: string;
   
   @IsNotEmpty()
   ofert: string;
+
+  @IsNotEmpty()
+  parking: string;
   
   @IsNotEmpty()
   neigborhood: string;
@@ -28,9 +28,6 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   
   @IsNotEmpty()
   stratum: string;
-  
-  @IsNotEmpty()
-  breed: string;
   
   @IsNotEmpty()
   price: number

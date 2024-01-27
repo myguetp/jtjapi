@@ -1,26 +1,24 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreateParkingDto } from './dto/create-parking.dto';
 import { UpdateParkingDto } from './dto/update-parking.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Parking, ParkingDocument } from './shema/parking.shema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ParkingService {
-  create(createParkingDto: CreateParkingDto) {
-    return 'This action adds a new parking';
+  constructor(
+    @InjectModel(Parking.name) private parkingModule: Model<ParkingDocument>,
+  ) {}
+  
+ async create(parkingModule: CreateParkingDto) {
+    const ofertCrate = await this.parkingModule.create(parkingModule);
+    return ofertCrate;
   }
 
-  findAll() {
-    return `This action returns all parking`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} parking`;
-  }
-
-  update(id: number, updateParkingDto: UpdateParkingDto) {
-    return `This action updates a #${id} parking`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} parking`;
+  async findAll() {
+    const list = await this.parkingModule.find({});
+    return list;
   }
 }

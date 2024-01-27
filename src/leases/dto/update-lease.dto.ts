@@ -19,6 +19,9 @@ export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {
   
   @IsNotEmpty()
   ofert: string;
+
+  @IsNotEmpty()
+  parking: string;
   
   @IsNotEmpty()
   neigborhood: string;
@@ -28,9 +31,6 @@ export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {
   
   @IsNotEmpty()
   stratum: string;
-  
-  @IsNotEmpty()
-  breed: string;
   
   @IsNotEmpty()
   price: number

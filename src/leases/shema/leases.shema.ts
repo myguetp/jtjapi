@@ -12,6 +12,9 @@ export class Leases {
   ofert: string;
 
   @Prop()
+  parking: string;
+
+  @Prop()
   neigborhood: string;
 
   @Prop()
@@ -19,9 +22,6 @@ export class Leases {
 
   @Prop()
   stratum: string;
-
-  @Prop()
-  breed: string;
 
   @Prop()
   price: string;

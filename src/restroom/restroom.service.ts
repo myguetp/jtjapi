@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreateRestroomDto } from './dto/create-restroom.dto';
 import { InjectModel } from '@nestjs/mongoose';

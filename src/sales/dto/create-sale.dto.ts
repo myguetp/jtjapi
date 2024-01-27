@@ -10,12 +10,12 @@ export class File {
 }
 
 export class CreateSaleDto {
-  @IsString()
-  @IsNotEmpty()
-  register: string;
-  
+   
   @IsNotEmpty()
   ofert: string;
+
+  @IsNotEmpty()
+  parking: string;
   
   @IsNotEmpty()
   neigborhood: string;
@@ -26,12 +26,8 @@ export class CreateSaleDto {
   @IsNotEmpty()
   stratum: string;
   
+ 
   @IsNotEmpty()
-  breed: string;
-  
-  @IsNotEmpty()
-  @Min(0)
-  @Max(9999999)
   price: number
 
   @IsNotEmpty()
@@ -47,8 +43,6 @@ export class CreateSaleDto {
   administration: string;
   
   @IsNotEmpty()
-  @Min(0)
-  @Max(9999999)
   area: number;
   
   @IsNotEmpty()
@@ -60,7 +54,6 @@ export class CreateSaleDto {
   @IsNotEmpty()
   finnallyAt: number = Date.now() + 60 * 24 * 60 * 60 * 1000;
   
-  @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => File)

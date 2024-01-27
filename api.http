@@ -9,7 +9,6 @@ Content-Type: application/json
   "neigborhood": "1",
   "property": "1",
   "stratum": "1",
-  "breed": "1",
   "price": "1",
   "room": "1",
   "restroom": "1",

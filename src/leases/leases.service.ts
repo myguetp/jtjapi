@@ -36,7 +36,6 @@ export class LeasesService {
     room?: string,
     restroom?: string,
     age?: string,
-    breed?: string,
     minPrice?: number,
     maxPrice?: number,
     minArea?: number,
@@ -60,9 +59,6 @@ export class LeasesService {
       query.age = age;
     }
   
-    if (breed !== undefined) {
-      query.breed = breed;
-    }
     
     if (minPrice !== undefined) {
       query.price = { $gte: minPrice };

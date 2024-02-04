@@ -27,3 +27,153 @@ Content-Type: application/json
 }
 
 
+
+{
+  "next": "",
+  "previous": null,
+  "result": [
+    {
+      "continent": "America",
+      "country": [
+        {
+          "id": 1,
+          "indicative": "+ 57",
+          "currency": "COP",
+          "name": "Colombia",
+          "city": [
+            {
+              "id": 1,
+              "name": "Bogotá",
+            },
+            {
+              "id": 2,
+              "name": "Medellin",
+            },
+            {
+              "id": 3,
+              "name": "Cali",
+            },
+            {
+              "id": 4,
+              "name": "Cartagena",
+            },
+            {
+              "id": 5,
+              "name": "Barranquilla",
+            },
+            {
+              "id": 6,
+              "name": "Bucaramanga",
+            },
+            {
+              "id": 7,
+              "name": "Cucuta",
+            },
+            {
+              "id": 8,
+              "name": "Pereira",
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "indicative": "+ 55",
+          "currency": "BRL",
+          "name": "Brasil",
+          "city": [
+            {
+              "id": 1,
+              "name": "Sao pablo",
+            },
+            {
+              "id": 2,
+              "name": "Rio de janeiro",
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "indicative": "+ 54",
+          "currency": "ARS",
+          "name": "Argentina",
+          "city": [
+            {
+              "id": 1,
+              "name": "Buenos Aires",
+            },
+            {
+              "id": 2,
+              "name": "Mendoza",
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "indicative": "+ 56",
+          "currency": "CLP",
+          "name": "Chile",
+          "city": [
+            {
+              "id": 1,
+              "name": "Santiago de chile",
+            },
+            {
+              "id": 2,
+              "name": "Antofagasta",
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "indicative": "+ 51",
+          "currency": "PEN",
+          "name": "Peru",
+          "city": [
+            {
+              "id": 1,
+              "name": "Santiago de chile",
+            },
+            {
+              "id": 2,
+              "name": "Antofagasta",
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "indicative": "+ 593",
+          "currency": "USD",
+          "name": "ECUADOR",
+          "city": [
+            {
+              "id": 1,
+              "name": "Guayaquil",
+            },
+            {
+              "id": 2,
+              "name": "Quito",
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "indicative": "+ 58",
+          "currency": "USD",
+          "name": "Venezuela",
+          "city": [
+            {
+              "id": 1,
+              "name": "Caracas",
+            },
+            {
+              "id": 2,
+              "name": "Maracaibo",
+            }
+          ]
+        },
+      ]
+    }
+  ]
+}
+
+

@@ -36,6 +36,8 @@ export class LeasesService {
     room?: string,
     restroom?: string,
     age?: string,
+    parking?: string,
+    property?: string,
     minPrice?: number,
     maxPrice?: number,
     minArea?: number,
@@ -57,6 +59,14 @@ export class LeasesService {
   
     if (age !== undefined) {
       query.age = age;
+    }
+    
+    if (parking !== undefined) {
+      query.parking = parking;
+    }
+
+    if (property !== undefined) {
+      query.property = property;
     }
   
     

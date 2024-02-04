@@ -29,6 +29,12 @@ export class Sales {
   neigborhood: string;
 
   @Prop()
+  country: string;
+
+  @Prop()
+  city: string;
+
+  @Prop()
   property: string;
 
   @Prop()

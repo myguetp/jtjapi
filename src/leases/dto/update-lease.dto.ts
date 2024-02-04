@@ -13,10 +13,7 @@ export class File {
 }
 
 export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {
-  @IsString()
-  @IsNotEmpty()
-  register: string;
-  
+ 
   @IsNotEmpty()
   ofert: string;
 
@@ -25,6 +22,13 @@ export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {
   
   @IsNotEmpty()
   neigborhood: string;
+
+  @IsNotEmpty()
+  country: string;
+
+  @IsNotEmpty()
+  city: string;
+  
   
   @IsNotEmpty()
   property: string;

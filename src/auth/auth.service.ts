@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { User, UserDocument } from 'src/users/shema/users.shema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -7,6 +7,8 @@ import { RegisterAuthDto } from './dto/register-auth.dto';
 import { hash, compare } from 'bcrypt'
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
+import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
+import { CreateLeaseDto } from 'src/leases/dto/create-lease.dto';
 
 @Injectable()
 export class AuthService {
@@ -42,5 +44,29 @@ export class AuthService {
 
     return data;
 
+  }
+  async addSaleToUser(userId: number, createSaleDto: CreateSaleDto) {
+    const user = await this.userModel.findById(userId).exec();
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    user.sales.push(createSaleDto);
+    await user.save();
+
+    return user;
+  }
+  async addLeaseToUser(userId: number, CreateLeaseDto: CreateLeaseDto) {
+    const user = await this.userModel.findById(userId).exec();
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    user.sales.push(CreateLeaseDto);
+    await user.save();
+
+    return user;
   }
 }

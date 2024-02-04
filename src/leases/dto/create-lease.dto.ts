@@ -10,9 +10,6 @@ export class File {
 }
 
 export class CreateLeaseDto {
-  @IsString()
-  @IsNotEmpty()
-  register: string;
   
   @IsNotEmpty()
   ofert: string;
@@ -22,6 +19,12 @@ export class CreateLeaseDto {
 
   @IsNotEmpty()
   neigborhood: string;
+
+  @IsNotEmpty()
+  country: string;
+
+  @IsNotEmpty()
+  city: string;
   
   @IsNotEmpty()
   property: string;
@@ -31,8 +34,6 @@ export class CreateLeaseDto {
   
  
   @IsNotEmpty()
-  @Min(0)
-  @Max(9999999)
   price: number
 
   @IsNotEmpty()
@@ -48,8 +49,6 @@ export class CreateLeaseDto {
   administration: string;
   
   @IsNotEmpty()
-  @Min(0)
-  @Max(9999999)
   area: number;
   
   @IsNotEmpty()

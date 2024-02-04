@@ -19,6 +19,12 @@ export class CreateSaleDto {
   
   @IsNotEmpty()
   neigborhood: string;
+
+  @IsNotEmpty()
+  country: string;
+
+  @IsNotEmpty()
+  city: string;
   
   @IsNotEmpty()
   property: string;

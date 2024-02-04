@@ -24,6 +24,9 @@ import { SalesModule } from './sales/sales.module'
 import { MailerModule } from './mailer/mailer.module';
 import { InfoClientModule } from './info-client/info-client.module';
 import { ParkingModule } from './parking/parking.module';
+import { InterestedModule } from './interested/interested.module';
+import { ContactModule } from './contact/contact.module';
+import { CityModule } from './city/city.module';
 import * as path from 'path'
 
 @Module({
@@ -49,6 +52,9 @@ import * as path from 'path'
     MailerModule,
     InfoClientModule,
     ParkingModule,
+    InterestedModule,
+    ContactModule,
+    CityModule,
   ],
   controllers: [AppController],
   providers: [AppService],

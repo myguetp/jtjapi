@@ -103,6 +103,11 @@ export class SalesService {
     return list;
   }
 
+  async findAllByOfert(ofert: string) {
+    const list = await this.salesModule.find({ ofert });
+    return list;
+  }
+
   async update(_id: string, updateSaleDto: UpdateSaleDto) {
     const update = await this.salesModule.findByIdAndUpdate(_id, updateSaleDto);
     return update;

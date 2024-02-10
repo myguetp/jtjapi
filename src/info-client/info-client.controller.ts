@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { InfoClientService } from './info-client.service';
 import { CreateInfoClientDto } from './dto/create-info-client.dto';

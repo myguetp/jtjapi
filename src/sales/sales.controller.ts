@@ -70,6 +70,11 @@ export class SalesController {
     return this.salesService.findAllByProperty(property);
   }
 
+  @Get('byProperty/:ofert')
+  findAllByOfert(@Param('ofert') ofert: string) {
+    return this.salesService.findAllByOfert(ofert);
+  }
+
   @Put(':id')
   update(@Param('id') _id: string, @Body() updateSaleDto: UpdateSaleDto) {
     return this.salesService.update(_id, updateSaleDto);

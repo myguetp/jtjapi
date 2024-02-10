@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, ValidateNested } from 'class-validator';
 import { CreateSaleDto } from './create-sale.dto';
 
 export class File {
@@ -21,7 +21,7 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   parking: string;
   
   @IsNotEmpty()
-  neigborhood: string;
+  neighborhood: string;
 
   @IsNotEmpty()
   country: string;

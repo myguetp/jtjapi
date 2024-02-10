@@ -1,19 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CityService } from './city.service';
+import { CreateCityDto } from './dto/create-city.dto';
 
 @Controller('city')
 export class CityController {
   constructor(private readonly cityService: CityService) {}
 
-  @Get()
-  async findAll(): Promise<any[]> {
-    try {
-      const cities = await this.cityService.findAll();
+  @Post('creationCity')
+  create(@Body() createCityDto: CreateCityDto) {
+    return this.cityService.create(createCityDto);
+  }
 
-      return cities;
-    } catch (error) {
-      console.error('Error al obtener las ciudades:', error.message);
-      throw error;
-    }
+  @Get()
+  findAll() {
+    return this.cityService.findAll();
   }
 }

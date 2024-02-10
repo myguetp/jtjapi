@@ -26,7 +26,7 @@ export class Sales {
   parking: string;
 
   @Prop()
-  neigborhood: string;
+  neighborhood: string;
 
   @Prop()
   country: string;

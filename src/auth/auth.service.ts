@@ -9,20 +9,31 @@ import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
 import { CreateLeaseDto } from 'src/leases/dto/create-lease.dto';
+import { SalesService } from 'src/sales/sales.service';
+
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
-    private jwtSetvice: JwtService
+    private jwtSetvice: JwtService,
+    private salesService: SalesService 
   ) {}
 
   async register(userObject: RegisterAuthDto) {
-    const  { password } =  userObject;
+    const { password, sales } = userObject;
     const plainToHash = await hash(password, 10);
-    userObject = {...userObject, password: plainToHash};
-    return this.userModel.create(userObject)
+    const userWithHashedPassword = { ...userObject, password: plainToHash };
+  
+    const newUser = await this.userModel.create(userWithHashedPassword);
+  
+    for (const sale of sales) {
+      await this.salesService.create(sale);
+    }
+  
+    return newUser;
   }
+  
   async login(userObjectLogin: LoginAuthDto) {
     const { email, password } = userObjectLogin
     const findUser = await this.userModel.findOne({email})
@@ -35,7 +46,6 @@ export class AuthService {
 
     const payload = {id: findUser._id, name: findUser.name}
     const token = this.jwtSetvice.sign(payload)
-    console.log({ token })
 
     const data = {
       user: findUser,
@@ -45,26 +55,17 @@ export class AuthService {
     return data;
 
   }
-  async addSaleToUser(userId: number, createSaleDto: CreateSaleDto) {
+
+  async addSaleToUser(userId: string, createSaleDto: CreateSaleDto) {
     const user = await this.userModel.findById(userId).exec();
 
     if (!user) {
       throw new NotFoundException(`User with ID ${userId} not found`);
     }
 
+    await this.salesService.create(createSaleDto);
+    
     user.sales.push(createSaleDto);
-    await user.save();
-
-    return user;
-  }
-  async addLeaseToUser(userId: number, CreateLeaseDto: CreateLeaseDto) {
-    const user = await this.userModel.findById(userId).exec();
-
-    if (!user) {
-      throw new NotFoundException(`User with ID ${userId} not found`);
-    }
-
-    user.sales.push(CreateLeaseDto);
     await user.save();
 
     return user;

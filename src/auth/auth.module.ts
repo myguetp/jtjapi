@@ -6,6 +6,7 @@ import { User, UserSchema } from 'src/users/shema/users.shema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { Sales, SalesSchema } from 'src/sales/shema/sales.shema';
+import { SalesService } from 'src/sales/sales.service';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { Sales, SalesSchema } from 'src/sales/shema/sales.shema';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, SalesService],
 })
 export class AuthModule {}

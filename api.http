@@ -6,7 +6,7 @@ Content-Type: application/json
 {
   "register": "657509efb0c5853ab661195e",
   "ofert": "1",
-  "neigborhood": "1",
+  "neighborhood": "1",
   "property": "1",
   "stratum": "1",
   "price": "1",
@@ -35,8 +35,8 @@ Content-Type: application/json
     {
       "continent": "America",
       "country": [
-        {
-          "id": 1,
+          {
+          "id": 4,
           "indicative": "+ 57",
           "currency": "COP",
           "name": "Colombia",
@@ -47,19 +47,19 @@ Content-Type: application/json
             },
             {
               "id": 2,
-              "name": "Medellin",
+              "name": "Medellín",
             },
             {
               "id": 3,
-              "name": "Cali",
+              "name": "Cartagena de Indias",
             },
             {
               "id": 4,
-              "name": "Cartagena",
+              "name": "Barranquilla",
             },
             {
               "id": 5,
-              "name": "Barranquilla",
+              "name": "Cali",
             },
             {
               "id": 6,
@@ -67,107 +67,179 @@ Content-Type: application/json
             },
             {
               "id": 7,
-              "name": "Cucuta",
+              "name": "Santa Marta",
             },
             {
               "id": 8,
+              "name": "Manizales",
+            },
+            {
+              "id": 9,
+              "name": "Villavicencio",
+            },
+            {
+              "id": 10,
+              "name": "Ibagué",
+            },
+            {
+              "id": 11,
               "name": "Pereira",
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "indicative": "+ 55",
-          "currency": "BRL",
-          "name": "Brasil",
-          "city": [
-            {
-              "id": 1,
-              "name": "Sao pablo",
             },
             {
-              "id": 2,
-              "name": "Rio de janeiro",
-            }
-          ]
-        },
-        {
-          "id": 3,
-          "indicative": "+ 54",
-          "currency": "ARS",
-          "name": "Argentina",
-          "city": [
-            {
-              "id": 1,
-              "name": "Buenos Aires",
+              "id": 12,
+              "name": "Cúcuta",
             },
             {
-              "id": 2,
-              "name": "Mendoza",
-            }
-          ]
-        },
-        {
-          "id": 4,
-          "indicative": "+ 56",
-          "currency": "CLP",
-          "name": "Chile",
-          "city": [
-            {
-              "id": 1,
-              "name": "Santiago de chile",
+              "id": 13,
+              "name": "Valledupar",
             },
             {
-              "id": 2,
-              "name": "Antofagasta",
-            }
-          ]
-        },
-        {
-          "id": 5,
-          "indicative": "+ 51",
-          "currency": "PEN",
-          "name": "Peru",
-          "city": [
-            {
-              "id": 1,
-              "name": "Santiago de chile",
+              "id": 14,
+              "name": "Quibdó",
             },
             {
-              "id": 2,
-              "name": "Antofagasta",
-            }
-          ]
-        },
-        {
-          "id": 6,
-          "indicative": "+ 593",
-          "currency": "USD",
-          "name": "ECUADOR",
-          "city": [
-            {
-              "id": 1,
-              "name": "Guayaquil",
+              "id": 15,
+              "name": "Popayán",
             },
             {
-              "id": 2,
-              "name": "Quito",
-            }
-          ]
-        },
-        {
-          "id": 6,
-          "indicative": "+ 58",
-          "currency": "USD",
-          "name": "Venezuela",
-          "city": [
-            {
-              "id": 1,
-              "name": "Caracas",
+              "id": 16,
+              "name": "Pasto",
             },
             {
-              "id": 2,
-              "name": "Maracaibo",
+              "id": 17,
+              "name": "Armenia",
+            },
+            {
+              "id": 18,
+              "name": "Riohacha",
+            },
+            {
+              "id": 19,
+              "name": "Montería",
+            },
+            {
+              "id": 20,
+              "name": "Neiva",
+            },
+            {
+              "id": 21,
+              "name": "Tunja",
+            },
+            {
+              "id": 22,
+              "name": "Sincelejo",
+            },
+            {
+              "id": 23,
+              "name": "San Gil",
+            },
+            {
+              "id": 24,
+              "name": "Florencia",
+            },
+            {
+              "id": 25,
+              "name": "Yopal",
+            },
+            {
+              "id": 26,
+              "name": "Soacha",
+            },
+            {
+              "id": 27,
+              "name": "Bello",
+            },
+            {
+              "id": 28,
+              "name": "Buenaventura",
+            },
+            {
+              "id": 29,
+              "name": "Mocoa",
+            },
+            {
+              "id": 30,
+              "name": "San José Del Guaviare",
+            },
+            {
+              "id": 31,
+              "name": "Inírida",
+            },
+            {
+              "id": 32,
+              "name": "Leticia",
+            },
+            {
+              "id": 33,
+              "name": "Palmira",
+            },
+            {
+              "id": 34,
+              "name": "Arauca",
+            },
+            {
+              "id": 35,
+              "name": "Mitú",
+            },
+            {
+              "id": 36,
+              "name": "Puerto Carreño",
+            },
+            {
+              "id": 37,
+              "name": "Barrancabermeja",
+            },
+            {
+              "id": 38,
+              "name": "Apartadó",
+            },
+            {
+              "id": 39,
+              "name": "Maicao",
+            },
+            {
+              "id": 40,
+              "name": "Tumaco",
+            },
+            {
+              "id": 41,
+              "name": "Turbo",
+            },
+            {
+              "id": 42,
+              "name": "Tuluá",
+            },
+            {
+              "id": 43,
+              "name": "Ipiales",
+            },
+            {
+              "id": 44,
+              "name": "Soledad",
+            },
+            {
+              "id": 45,
+              "name": "Puerto Berrío",
+            },
+            {
+              "id": 46,
+              "name": "Girardot",
+            },
+            {
+              "id": 47,
+              "name": "Magangué",
+            },
+            {
+              "id": 48,
+              "name": "Ocaña",
+            },
+            {
+              "id": 49,
+              "name": "Ciénaga",
+            },
+            {
+              "id": 50,
+              "name": "Santa Cruz de Lorica",
             }
           ]
         },

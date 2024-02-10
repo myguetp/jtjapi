@@ -21,7 +21,7 @@ export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {
   parking: string;
   
   @IsNotEmpty()
-  neigborhood: string;
+  neighborhood: string;
 
   @IsNotEmpty()
   country: string;

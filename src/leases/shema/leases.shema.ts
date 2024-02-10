@@ -7,15 +7,13 @@ export type LeasesDocument = Leases & Document;
 @Schema()
 export class Leases {
   @Prop()
-  isUser: string;
-  @Prop()
   ofert: string;
 
   @Prop()
   parking: string;
 
   @Prop()
-  neigborhood: string;
+  neighborhood: string;
 
   @Prop()
   country: string;
@@ -30,7 +28,7 @@ export class Leases {
   stratum: string;
 
   @Prop()
-  price: string;
+  price: number;
 
   @Prop()
   room: string;

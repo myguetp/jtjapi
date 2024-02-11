@@ -28,17 +28,18 @@ export class SalesController {
     }),
   )
   async create(@Body() createSaleDto: CreateSaleDto) {
-    createSaleDto.picture = this.mapFilesInfo(createSaleDto.picture);
-    
+    if (createSaleDto.picture) {
+      createSaleDto.picture = this.mapFilesInfo(createSaleDto.picture);
+    }
+  
     return this.salesService.create(createSaleDto);
   }
+  
 
   private mapFilesInfo(pictures: File[]): File[] {
     return pictures.map((file) => ({
-      fieldname: file.fieldname,
-      originalname: file.originalname,
-      encoding: file.encoding,
-      mimetype: file.mimetype
+      name: file.name,
+      type: file.type
     }));
   }
 

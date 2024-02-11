@@ -8,7 +8,6 @@ import { hash, compare } from 'bcrypt'
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
-import { CreateLeaseDto } from 'src/leases/dto/create-lease.dto';
 import { SalesService } from 'src/sales/sales.service';
 
 
@@ -19,6 +18,17 @@ export class AuthService {
     private jwtSetvice: JwtService,
     private salesService: SalesService 
   ) {}
+
+
+  async findAll() {
+    const list = await this.userModel.find({});
+    return list;
+  }
+
+  async findOne(_id: string) {
+    const findone = await this.userModel.findById(_id);
+    return findone;
+  }
 
   async register(userObject: RegisterAuthDto) {
     const { password, sales } = userObject;

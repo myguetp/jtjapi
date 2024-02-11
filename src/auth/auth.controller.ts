@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post, Body, Param } from '@nestjs/common';
+import { Controller, Post, Body, Param, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -11,6 +11,16 @@ import { SalesService } from 'src/sales/sales.service';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService, private readonly salesService: SalesService) {}
+
+  @Get('allUser')
+  findAll() {
+    return this.authService.findAll();
+  }
+
+  @Get('allUser/:id')
+  findOne(@Param('id') _id: string) {
+    return this.authService.findOne(_id);
+  }
 
   @Post('register')
   registerUser(@Body() userObject: RegisterAuthDto) {

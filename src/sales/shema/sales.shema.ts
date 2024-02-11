@@ -7,13 +7,13 @@ export type SalesDocument = Sales & Document;
 @Schema()
 export class File {
   @Prop()
-  fieldname: string;
+  type: string
   @Prop()
-  originalname: string;
+  name: string
   @Prop()
-  encoding: string;
+  encoding: string
   @Prop()
-  mimetype: string;
+  mimetype: string
 }
 
 @Schema()

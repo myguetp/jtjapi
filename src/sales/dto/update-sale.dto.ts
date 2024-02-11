@@ -5,10 +5,8 @@ import { IsArray, IsNotEmpty, ValidateNested } from 'class-validator';
 import { CreateSaleDto } from './create-sale.dto';
 
 export class File {
-  fieldname: string;
-  originalname: string;
-  encoding: string;
-  mimetype: string;
+  name: string
+  type: string
 }
 
 

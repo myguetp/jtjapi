@@ -64,7 +64,7 @@ export class CreateLeaseDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => File)
-  picture: File[];
+  file: File[];
 
   constructor(data?: Partial<CreateLeaseDto>) {
     Object.assign(this, data);

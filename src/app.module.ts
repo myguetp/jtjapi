@@ -27,14 +27,10 @@ import { ParkingModule } from './parking/parking.module';
 import { InterestedModule } from './interested/interested.module';
 import { ContactModule } from './contact/contact.module';
 import { CityModule } from './city/city.module';
-import * as path from 'path'
 
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.MONGODB_URI),
-    MulterModule.register({
-      dest: path.join(__dirname, '..', 'uploads'),
-    }),
     LeasesModule,
     RentModule,
     OfertModule,
@@ -54,7 +50,7 @@ import * as path from 'path'
     ParkingModule,
     InterestedModule,
     ContactModule,
-    CityModule,
+    CityModule
   ],
   controllers: [AppController],
   providers: [AppService],

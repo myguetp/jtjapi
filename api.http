@@ -1,6 +1,5 @@
 ### Upload sales uplaod 
 
-POST http://localhost:3001/sales/upload
 Content-Type: application/json
 
 {
@@ -16,7 +15,7 @@ Content-Type: application/json
   "administration": "1",
   "area": "1",
   "description": "1",
-  "picture": [
+  "file": [
     {
       "fieldname": "carro",
       "originalname": "carro.jpg",

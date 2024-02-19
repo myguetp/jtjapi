@@ -7,7 +7,7 @@ import { RegisterAuthDto } from './dto/register-auth.dto';
 import { hash, compare } from 'bcrypt'
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
-import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
+import { CreateSaleDto, CustomFile } from 'src/sales/dto/create-sale.dto';
 import { SalesService } from 'src/sales/sales.service';
 
 
@@ -31,23 +31,19 @@ export class AuthService {
   }
 
   async register(userObject: RegisterAuthDto) {
-    const { password, sales } = userObject;
+    const { password } = userObject;
     const plainToHash = await hash(password, 10);
     const userWithHashedPassword = { ...userObject, password: plainToHash };
   
     const newUser = await this.userModel.create(userWithHashedPassword);
   
-    for (const sale of sales) {
-      await this.salesService.create(sale);
-    }
-  
+ 
     return newUser;
   }
   
   async login(userObjectLogin: LoginAuthDto) {
     const { email, password } = userObjectLogin
     const findUser = await this.userModel.findOne({email})
-    console.log({ findUser })
     if(!findUser) new HttpException('usuario no encontrado', 404)
     
     const checkPassword = await compare(password, findUser.password);
@@ -68,16 +64,17 @@ export class AuthService {
 
   async addSaleToUser(userId: string, createSaleDto: CreateSaleDto) {
     const user = await this.userModel.findById(userId).exec();
-
+  
     if (!user) {
       throw new NotFoundException(`User with ID ${userId} not found`);
     }
-
+  
     await this.salesService.create(createSaleDto);
-    
+  
     user.sales.push(createSaleDto);
     await user.save();
-
+  
+  
     return user;
   }
 }

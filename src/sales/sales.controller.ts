@@ -1,21 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, UseInterceptors, Put, Delete, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Delete, Param, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
-import { File } from './dto/create-sale.dto';
-import { UpdateSaleDto } from './dto/update-sale.dto';
 
-const storage = diskStorage({
-  destination: './uploads',
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const extension = extname(file.originalname);
-    cb(null, `${file.fieldname}-${uniqueSuffix}${extension}`);
-  },
-});
+import { UpdateSaleDto } from './dto/update-sale.dto';
+import { FilesInterceptor } from '@nestjs/platform-express/multer/interceptors/files.interceptor';
+import { diskStorage } from 'multer';
+
 
 @Controller('sales')
 export class SalesController {
@@ -23,24 +14,29 @@ export class SalesController {
 
   @Post('uploadcrate')
   @UseInterceptors(
-    FilesInterceptor('picture', 10, {
-      storage: storage,
-    }),
+    FilesInterceptor('file', 10, {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, callback) => {
+          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+          callback(null, file.fieldname + '-' + uniqueSuffix);
+        },
+      }),
+    })
   )
-  async create(@Body() createSaleDto: CreateSaleDto) {
-    if (createSaleDto.picture) {
-      createSaleDto.picture = this.mapFilesInfo(createSaleDto.picture);
+  async create(@UploadedFiles() files: Express.Multer.File[], @Body() createSaleDto: CreateSaleDto) {
+    try {
+      if (files && files.length > 0) {
+        createSaleDto.file = files.map(file => ({ name: file.originalname, type: file.mimetype }));
+      }
+  
+      const result = await this.salesService.create(createSaleDto);
+      
+      return result;
+    } catch (error) {
+      console.error('Error uploading files:', error);
+      throw error;
     }
-  
-    return this.salesService.create(createSaleDto);
-  }
-  
-
-  private mapFilesInfo(pictures: File[]): File[] {
-    return pictures.map((file) => ({
-      name: file.name,
-      type: file.type
-    }));
   }
 
   @Get('byAllData')

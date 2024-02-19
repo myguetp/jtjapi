@@ -1,16 +1,22 @@
 /* eslint-disable prettier/prettier */
-import { Type } from 'class-transformer';
+// import { Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, ValidateNested } from 'class-validator';
 
-export class File {
-  name: string
-  type: string
+export interface CustomFile {
+  name: string;
+  type: string;
 }
 
 export class CreateSaleDto {
    
   @IsNotEmpty()
   ofert: string;
+
+  @IsNotEmpty()
+  email: string;
+
+  @IsNotEmpty()
+  phone: string;
 
   @IsNotEmpty()
   parking: string;
@@ -51,20 +57,8 @@ export class CreateSaleDto {
   @IsNotEmpty()
   description: string;
   
-  @IsNotEmpty()
-  createdAt: number = Date.now();
-  
-  @IsNotEmpty()
-  finnallyAt: number = Date.now() + 60 * 24 * 60 * 60 * 1000;
-  
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => File)
-  picture: File[];
-
-  constructor(data?: Partial<CreateSaleDto>) {
-    Object.assign(this, data);
-    this.createdAt = Date.now();
-    this.finnallyAt = this.createdAt + 60 * 24 * 60 * 60 * 1000;
-  }
+  file: CustomFile[];
+ 
 }

@@ -24,7 +24,7 @@ export class MailerService {
   }
 
   async sendEmail(dto: SendEmailDto) {
-    const {from, recipients, subject, html, placeholderReplacements} = dto;
+    const {from, recipients, subject, html} = dto;
 
     const transport = this.mailTrasnport();
 

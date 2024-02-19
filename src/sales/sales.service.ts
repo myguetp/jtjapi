@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { CreateSaleDto } from './dto/create-sale.dto';
+import { CreateSaleDto, CustomFile } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Sales, SalesDocument } from './shema/sales.shema';
@@ -12,17 +12,15 @@ export class SalesService {
     @InjectModel(Sales.name) private salesModule: Model<SalesDocument>,
   ) {}
 
-  async create(createSaleDto: CreateSaleDto) {
-    try {
-      const sale = new this.salesModule(createSaleDto);
-
-      const createdSale = await sale.save();
-
-      return createdSale;
-    } catch (error) {
-      console.error('Error al crear la venta:', error.message);
-      throw error;
-    }
+  async create(createSaleDto: CreateSaleDto): Promise<SalesDocument> {
+    const fileData = createSaleDto.file ? createSaleDto.file : null;
+    console.log('filee data', fileData);
+  
+    const sale = new this.salesModule({ ...createSaleDto, file: fileData });
+    console.log('salee dataa', sale);
+  
+    const createdSale = await sale.save();
+    return createdSale;
   }
 
   async findAllByAllMethods(

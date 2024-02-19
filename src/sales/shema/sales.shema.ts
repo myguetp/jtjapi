@@ -4,23 +4,24 @@ import { Document } from 'mongoose';
 
 export type SalesDocument = Sales & Document;
 
-@Schema()
-export class File {
-  @Prop()
-  type: string
-  @Prop()
-  name: string
-  @Prop()
-  encoding: string
-  @Prop()
-  mimetype: string
+export interface CustomFile {
+  name: string;
+  type: string;
 }
+
+const FileSchema = SchemaFactory.createForClass(File);
 
 @Schema()
 export class Sales {
 
   @Prop()
   ofert: string;
+
+  @Prop()
+  email: string;
+
+  @Prop()
+  phone: string;
 
   @Prop()
   parking: string;
@@ -61,14 +62,9 @@ export class Sales {
   @Prop()
   description: string;
 
-  @Prop()
-  createdAt: number;
+  @Prop({ type: [FileSchema] }) 
+  file: CustomFile[];
 
-  @Prop()
-  finnallyAt: number;
-
-  @Prop()
-  picture: File[];
 }
 
 export const SalesSchema = SchemaFactory.createForClass(Sales);

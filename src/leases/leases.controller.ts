@@ -18,14 +18,14 @@ import { File } from './dto/create-lease.dto';
 import { extname } from 'path';
 import { FilesInterceptor } from '@nestjs/platform-express/multer';
 
-const storage = diskStorage({
-  destination: './uploads',
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const extension = extname(file.originalname);
-    cb(null, `${file.fieldname}-${uniqueSuffix}${extension}`);
-  },
-});
+// const storage = diskStorage({
+//   destination: './upload',
+//   filename: (req, file, cb) => {
+//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+//     const extension = extname(file.originalname);
+//     cb(null, `${file.fieldname}-${uniqueSuffix}${extension}`);
+//   },
+// });
 
 @Controller('leases')
 export class LeasesController {
@@ -33,12 +33,12 @@ export class LeasesController {
 
   @Post('uploadcrate')
   @UseInterceptors(
-    FilesInterceptor('picture', 10, {
-      storage: storage,
+    FilesInterceptor('file', 10, {
+      // storage: storage,
     }),
   )
   async create(@Body() leasesService: CreateLeaseDto) {
-    leasesService.picture = this.mapFilesInfo(leasesService.picture);
+    leasesService.file = this.mapFilesInfo(leasesService.file);
 
     return this.leasesService.create(leasesService);
   }

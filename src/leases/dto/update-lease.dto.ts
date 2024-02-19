@@ -67,7 +67,7 @@ export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => File)
-  picture: File[];
+  file: File[];
 
   constructor(data?: Partial<CreateLeaseDto>) {
     super();

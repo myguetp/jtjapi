@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post, Body, Param, Get } from '@nestjs/common';
+import { Controller, Post, Body, Param, Get, UploadedFile } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginAuthDto } from './dto/login-auth.dto';
-import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
+import { CreateSaleDto, CustomFile } from 'src/sales/dto/create-sale.dto';
 import { SalesService } from 'src/sales/sales.service';
 
 @ApiTags('auth')

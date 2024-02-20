@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 // import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, ValidateNested } from 'class-validator';
+import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsString, ValidateNested } from 'class-validator';
 
 export interface CustomFile {
   name: string;
@@ -9,54 +9,87 @@ export interface CustomFile {
 
 export class CreateSaleDto {
    
+  // all
   @IsNotEmpty()
+  @IsString()
   ofert: string;
-
+  // all
   @IsNotEmpty()
+  @IsEmail()
   email: string;
-
+  // all
   @IsNotEmpty()
+  @IsString()
   phone: string;
 
-  @IsNotEmpty()
+  //Apartamento
+  //Casa
+  //oficina
+  @IsString()
   parking: string;
+
+  //Efificio.
+  @IsString()
+  flower: string
   
+  //All
   @IsNotEmpty()
+  @IsString()
   neighborhood: string;
   
+  //All
   @IsNotEmpty()
+  @IsString()
   country: string;
-
-  @IsNotEmpty()
-  city: string;
   
+  //All
   @IsNotEmpty()
+  @IsString()
+  city: string;
+
+  // All
+  @IsNotEmpty()
+  @IsString()
   property: string;
   
-  @IsNotEmpty()
+  //All
+  @IsString()
   stratum: string;
   
- 
+   //All
   @IsNotEmpty()
+  @IsNumber()
   price: number
-
-  @IsNotEmpty()
+  //Apartamento
+  //Casa
+  //Finca
+  @IsString()
   room: string;
-  
-  @IsNotEmpty()
+  //Apartamento
+  //Casa
+  //Finca
+  @IsString()
   restroom: string;
-  
+  //Apartamento
+  //Casa
+  //Finca
   @IsNotEmpty()
   age: string;
-  
+  //Apartamento
+  //Casa
+  //Finca
+  //Oficina
+  @IsString()
   administration: string;
   
+  //All
   @IsNotEmpty()
+  @IsNumber()
   area: number;
-  
-  @IsNotEmpty()
+  //All
+  @IsString()
   description: string;
-  
+  //All
   @IsArray()
   @ValidateNested({ each: true })
   file: CustomFile[];

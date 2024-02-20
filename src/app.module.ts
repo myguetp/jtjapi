@@ -27,10 +27,16 @@ import { ParkingModule } from './parking/parking.module';
 import { InterestedModule } from './interested/interested.module';
 import { ContactModule } from './contact/contact.module';
 import { CityModule } from './city/city.module';
+import { FileModule } from './file/file.module';
+import { join } from 'path'; // Importa la función join de path
+
 
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.MONGODB_URI),
+    MulterModule.register({
+      dest: join(__dirname, '..', 'uploads'), // Ruta absoluta al directorio 'uploads' en el directorio de la aplicación
+    }),
     LeasesModule,
     RentModule,
     OfertModule,
@@ -50,7 +56,8 @@ import { CityModule } from './city/city.module';
     ParkingModule,
     InterestedModule,
     ContactModule,
-    CityModule
+    CityModule,
+    FileModule
   ],
   controllers: [AppController],
   providers: [AppService],

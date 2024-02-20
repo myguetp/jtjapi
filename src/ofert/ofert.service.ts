@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreateOfertDto } from './dto/create-ofert.dto';
 import { Ofert, OfertDocument } from './shema/ofert.shema';

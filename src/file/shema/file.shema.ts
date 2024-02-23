@@ -38,6 +38,21 @@ export class File {
   @Prop({ required: true })
   @IsNumber()
   size: number;
+
+  @Prop({ required: true })
+  names: string
+
+  @Prop({ required: true })
+  contact: string
+
+  @Prop({ required: true })
+  maill: string
+
+  @Prop({ required: true })
+  phoneNum: string
+
+  @Prop({ required: true })
+  typeService: string
 }
 
 export const FileSchema = SchemaFactory.createForClass(File);

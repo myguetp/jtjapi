@@ -21,5 +21,6 @@ export class RegisterAuthDto extends PartialType(LoginAuthDto) {
   @ValidateNested({ each: true })
   @Type(() => CreateSaleDto)
   sales: CreateSaleDto[];
+  
  
 }

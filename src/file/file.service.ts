@@ -10,27 +10,44 @@ export class FileService {
   constructor(@InjectModel(File.name) private fileModel: Model<FileDocument>) {}
 
   async uploadFiles(
-    createFileDtos: CreateFileDto[],
-  ): Promise<FileDocument[]> {
+    createFileDto: CreateFileDto,
+  ): Promise<{
+    files: FileDocument[];
+    names: string;
+    contact: string;
+    maill: string;
+    phoneNum: string;
+    typeService: string;
+  }> {
     try {
       const savedFiles: Array<FileDocument> = [];
 
-      for (const createFileDto of createFileDtos) {
-        for (const file of createFileDto.files) {
-          const fileInstance = new this.fileModel({
-            originalname: file.originalname,
-            filename: file.originalname,
-            mimetype: file.mimetype,
-            size: file.size,
-            buffer: file.buffer,
-          });
+      for (const file of createFileDto.files) {
+        const fileInstance = new this.fileModel({
+          originalname: file.originalname,
+          filename: file.originalname,
+          mimetype: file.mimetype,
+          size: file.size,
+          buffer: file.buffer,
+          names: createFileDto.names, 
+          contact: createFileDto.contact,
+          maill: createFileDto.maill,
+          phoneNum: createFileDto.phoneNum,
+          typeService: createFileDto.typeService,
+        });
 
-          const savedFile = await fileInstance.save();
-          savedFiles.push(savedFile);
-        }
+        const savedFile = await fileInstance.save();
+        savedFiles.push(savedFile);
       }
 
-      return savedFiles;
+      return {
+        files: savedFiles,
+        names: createFileDto.names,
+        contact: createFileDto.contact,
+        maill: createFileDto.maill,
+        phoneNum: createFileDto.phoneNum,
+        typeService: createFileDto.typeService,
+      };
     } catch (error) {
       console.error(error);
       throw new Error(

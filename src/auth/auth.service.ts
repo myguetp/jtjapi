@@ -7,8 +7,10 @@ import { RegisterAuthDto } from './dto/register-auth.dto';
 import { hash, compare } from 'bcrypt'
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
-import { CreateSaleDto, CustomFile } from 'src/sales/dto/create-sale.dto';
+import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
 import { SalesService } from 'src/sales/sales.service';
+import { CreateFileDto } from 'src/file/dto/create-file.dto';
+import { FileService } from 'src/file/file.service';
 
 
 @Injectable()
@@ -16,7 +18,8 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private jwtSetvice: JwtService,
-    private salesService: SalesService 
+    private salesService: SalesService,
+    private fileService: FileService
   ) {}
 
 
@@ -76,5 +79,22 @@ export class AuthService {
   
   
     return user;
+  }
+
+
+  async addCommerceToUser(userId: string, createFileDto: CreateFileDto) {
+    const user = await this.userModel.findById(userId).exec();
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    await this.fileService.uploadFiles(createFileDto);
+
+    user.commerce.push(createFileDto);
+    await user.save();
+
+    return user;
+
   }
 }

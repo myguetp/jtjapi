@@ -7,6 +7,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { Sales, SalesSchema } from 'src/sales/shema/sales.shema';
 import { SalesService } from 'src/sales/sales.service';
+import { FileSchema } from 'src/file/shema/file.shema';
+import { MulterModule } from '@nestjs/platform-express';
+import { FileService } from 'src/file/file.service';
 
 @Module({
   imports: [
@@ -22,6 +25,15 @@ import { SalesService } from 'src/sales/sales.service';
         schema: SalesSchema,
       },
     ]),
+    MongooseModule.forFeature([
+      {
+        name: File.name,
+        schema: FileSchema,
+      },
+    ]),
+    MulterModule.register({
+      dest: './uploads',
+    }),
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
@@ -29,6 +41,6 @@ import { SalesService } from 'src/sales/sales.service';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, SalesService],
+  providers: [AuthService, SalesService, FileService],
 })
 export class AuthModule {}

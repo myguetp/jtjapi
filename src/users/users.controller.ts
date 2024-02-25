@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
+import { CreateFileDto } from 'src/file/dto/create-file.dto';
 
 @Controller('users')
 export class UsersController {
@@ -17,6 +18,11 @@ export class UsersController {
   @Post(':id/sales') // Endpoint para agregar una venta a un usuario
   addSaleToUser(@Param('id') userId: string, @Body() createSaleDto: CreateSaleDto) {
     return this.usersService.addSaleToUser(+userId, createSaleDto);
+  }
+
+  @Post(':id/commerce')
+  addCommerceToUser(@Param('_id') userId: string, @Body() createFileDto: CreateFileDto ) {
+    return this.usersService.addCommerceToUser(userId, createFileDto);
   }
 
   @Get()

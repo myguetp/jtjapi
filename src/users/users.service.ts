@@ -6,6 +6,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateSaleDto } from '../sales/dto/create-sale.dto';
 import { User, UserDocument } from './shema/users.shema';
+import { CreateFileDto } from 'src/file/dto/create-file.dto';
 
 @Injectable()
 export class UsersService {
@@ -45,5 +46,19 @@ export class UsersService {
     await user.save();
 
     return user;
+  }
+
+  async addCommerceToUser(userId: string, createFileDto: CreateFileDto) {
+    const user = await this.userModule.findById(userId).exec();
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    user.commerce.push(createFileDto);
+    await user.save();
+
+    return user;
+
   }
 }

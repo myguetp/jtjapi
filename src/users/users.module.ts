@@ -5,6 +5,7 @@ import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './shema/users.shema';
 import { Sales, SalesSchema } from 'src/sales/shema/sales.shema';
+import { FileSchema } from 'src/file/shema/file.shema';
 
 @Module({
   imports: [
@@ -18,6 +19,12 @@ import { Sales, SalesSchema } from 'src/sales/shema/sales.shema';
       {
         name: Sales.name,
         schema: SalesSchema,
+      },
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: File.name,
+        schema: FileSchema,
       },
     ]),
     

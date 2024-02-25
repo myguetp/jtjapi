@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { IsEmail, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { CreateFileDto } from 'src/file/dto/create-file.dto';
 import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
 
 export class CreateUserDto {
@@ -24,4 +25,7 @@ export class CreateUserDto {
 
   @ValidateNested({ each: true })
   sales: CreateSaleDto[];
+
+  @ValidateNested({ each: true })
+  commerce: CreateFileDto[];
 }

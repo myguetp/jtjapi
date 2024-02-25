@@ -12,7 +12,14 @@ export class FileService {
   async uploadFiles(
     createFileDto: CreateFileDto,
   ): Promise<{
-    files: FileDocument[];
+    files: {
+      originalname: string;
+      filename: string;
+      mimetype: string;
+      size: number;
+      _id: string;
+      __v: number;
+    }[];
     names: string;
     contact: string;
     maill: string;
@@ -20,33 +27,39 @@ export class FileService {
     typeService: string;
   }> {
     try {
-      const savedFiles: Array<FileDocument> = [];
-
-      for (const file of createFileDto.files) {
-        const fileInstance = new this.fileModel({
-          originalname: file.originalname,
-          filename: file.originalname,
-          mimetype: file.mimetype,
-          size: file.size,
-          buffer: file.buffer,
-          names: createFileDto.names, 
-          contact: createFileDto.contact,
-          maill: createFileDto.maill,
-          phoneNum: createFileDto.phoneNum,
-          typeService: createFileDto.typeService,
-        });
-
-        const savedFile = await fileInstance.save();
-        savedFiles.push(savedFile);
-      }
-
-      return {
-        files: savedFiles,
+      const filesData = createFileDto.files.map((file) => ({
+        originalname: file.originalname,
+        filename: file.originalname,
+        mimetype: file.mimetype,
+        size: file.size,
+        buffer: file.buffer,
+      }));
+  
+      const fileInstance = new this.fileModel({
+        files: filesData,
         names: createFileDto.names,
         contact: createFileDto.contact,
         maill: createFileDto.maill,
         phoneNum: createFileDto.phoneNum,
         typeService: createFileDto.typeService,
+      });
+  
+      const savedFile = await fileInstance.save();
+  
+      return {
+        files: savedFile.files.map((file) => ({
+          originalname: file.originalname,
+          filename: file.filename,
+          mimetype: file.mimetype,
+          size: file.size,
+          _id: file._id,
+          __v: file.__v,
+        })),
+        names: savedFile.names,
+        contact: savedFile.contact,
+        maill: savedFile.maill,
+        phoneNum: savedFile.phoneNum,
+        typeService: savedFile.typeService,
       };
     } catch (error) {
       console.error(error);
@@ -55,5 +68,30 @@ export class FileService {
           error.message,
       );
     }
+  }
+
+  async findAllByAllMethods(
+    names?: string,
+    contact?: string,
+    typeService?: string,
+  ) {
+    const query: any = {};
+  
+    if (names !== undefined) {
+      query.stratum = names;
+    }
+  
+    if (contact !== undefined) {
+      query.room = contact;
+    }
+  
+    if (typeService !== undefined) {
+      query.restroom = typeService;
+    }
+  
+   
+
+    const list = await this.fileModel.find(query).exec();
+    return list;
   }
 }

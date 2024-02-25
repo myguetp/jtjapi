@@ -5,12 +5,12 @@ import { RegisterAuthDto } from './dto/register-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
-import { SalesService } from 'src/sales/sales.service';
+import { CreateFileDto } from 'src/file/dto/create-file.dto';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService, private readonly salesService: SalesService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Get('allUser')
   findAll() {
@@ -31,6 +31,11 @@ export class AuthController {
   @Post(':_id/sales') 
   addSaleToUser(@Param('_id') userId: string, @Body() createSaleDto: CreateSaleDto) {
     return this.authService.addSaleToUser(userId, createSaleDto);
+  }
+
+  @Post(':_id/commerce')
+  addCommerceToUser(@Param('_id') userId: string, @Body() createFileDto: CreateFileDto ) {
+    return this.authService.addCommerceToUser(userId, createFileDto);
   }
 
   @Post('login')

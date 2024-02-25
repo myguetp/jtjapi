@@ -248,3 +248,32 @@ Content-Type: application/json
 }
 
 
+
+[
+  {
+    "files": [
+        {
+            "originalname": "yate.png",
+            "filename": "yate.png",
+            "mimetype": "image/png",
+            "size": 269628,
+            "_id": "65da95c79a5ef3e5e4444bed",
+            "__v": 0
+        },
+        {
+            "originalname": "carroo.jpg",
+            "filename": "carroo.jpg",
+            "mimetype": "image/jpeg",
+            "size": 128482,
+            "_id": "65da95c79a5ef3e5e4444bef",
+            "__v": 0
+        }
+    ],
+    "names": "lucas",
+    "contact": "conta luca",
+    "maill": "lucas@example.com",
+    "phoneNum": "333254666333",
+    "typeService": "2"
+}
+]
+

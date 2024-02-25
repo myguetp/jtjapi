@@ -4,6 +4,7 @@ import { LoginAuthDto } from './login-auth.dto';
 import { IsNotEmpty, ValidateNested } from 'class-validator';
 import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
 import { Type } from 'class-transformer';
+import { CreateFileDto } from 'src/file/dto/create-file.dto';
 
 export class RegisterAuthDto extends PartialType(LoginAuthDto) {
   @IsNotEmpty()
@@ -22,5 +23,8 @@ export class RegisterAuthDto extends PartialType(LoginAuthDto) {
   @Type(() => CreateSaleDto)
   sales: CreateSaleDto[];
   
+  @ValidateNested({ each: true })
+  @Type(() => CreateFileDto)
+  commerce: CreateFileDto[];
  
 }

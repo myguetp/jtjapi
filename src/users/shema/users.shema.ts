@@ -21,6 +21,9 @@ export class User {
 
  @Prop({ type: [{ type: Object }] })
   sales: object[];
+
+  @Prop({ type: [{ type: Object }] })  
+  commerce: object[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

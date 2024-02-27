@@ -1,11 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Put, Delete, Param, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Delete, Param, Query, UploadedFiles, UseInterceptors, HttpException, HttpStatus } from '@nestjs/common';
 import { SalesService } from './sales.service';
-import { CreateSaleDto } from './dto/create-sale.dto';
-
 import { UpdateSaleDto } from './dto/update-sale.dto';
 import { FilesInterceptor } from '@nestjs/platform-express/multer/interceptors/files.interceptor';
-import { diskStorage } from 'multer';
+import { CreateVenteDto } from './dto/create-vente.dto';
+import { CreateSaleDto } from './dto/create-sale.dto';
 
 
 @Controller('sales')
@@ -13,29 +12,70 @@ export class SalesController {
   constructor(private readonly salesService: SalesService) {}
 
   @Post('uploadcrate')
-  @UseInterceptors(
-    FilesInterceptor('file', 10, {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, callback) => {
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-          callback(null, file.fieldname + '-' + uniqueSuffix);
-        },
-      }),
-    })
-  )
-  async create(@UploadedFiles() files: Express.Multer.File[], @Body() createSaleDto: CreateSaleDto) {
+  @UseInterceptors(FilesInterceptor('files'))
+  async uploadFiles(@UploadedFiles() files: Express.Multer.File[], @Body() body: CreateVenteDto) {
     try {
-      if (files && files.length > 0) {
-        createSaleDto.file = files.map(file => ({ name: file.originalname, type: file.mimetype }));
+      if (!files || files.length === 0) {
+        throw new HttpException('No se encontró ningún archivo.', HttpStatus.BAD_REQUEST);
       }
   
-      const result = await this.salesService.create(createSaleDto);
-      
-      return result;
+      const createSaleDto: CreateSaleDto = {
+        files: files,
+        ofert: body.ofert,
+        email: body.email,
+        phone: body.phone,
+        parking: body.parking,
+        neighborhood: body.neighborhood,
+        country: body.country,
+        city: body.city,
+        property: body.property,
+        stratum: body.stratum,
+        price: body.price,
+        room: body.room,
+        restroom: body.restroom,
+        age: body.age,
+        administration: body.administration,
+        area: body.area,
+        description: body.description
+        
+      };
+
+      const response = await this.salesService.uploadFiles(createSaleDto);
+
+      const formattedResponse = [{
+        files: response.files.map(file => ({
+          originalname: file.originalname,
+          filename: file.filename,
+          mimetype: file.mimetype,
+          size: file.size,
+          _id: file._id,
+          __v: file.__v,
+        })),
+        ofert: response.ofert,
+        email: response.email,
+        phone: response.phone,
+        parking: response.parking,
+        neighborhood: response.neighborhood,
+        country: response.country,
+        city: response.city,
+        property: response.property,
+        stratum: response.stratum,
+        price: response.price,
+        room: response.room,
+        restroom: response.restroom,
+        age: response.age,
+        administration: response.administration,
+        area: response.area,
+        description: response.description
+      }];
+
+           
+      return formattedResponse;
+
     } catch (error) {
       console.error('Error uploading files:', error);
-      throw error;
+      throw new HttpException('Error al subir los archivos.', HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
   }
 

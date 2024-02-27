@@ -4,69 +4,68 @@ import { Document } from 'mongoose';
 
 export type SalesDocument = Sales & Document;
 
-export interface CustomFile {
-  name: string;
-  type: string;
+export interface misFiles {
+  originalname: string;
+  filename: string;
+  mimetype: string;
+  size: number;
+  _id: string;
+  __v: number;
 }
-
-const FileSchema = SchemaFactory.createForClass(File);
 
 @Schema()
 export class Sales {
+  @Prop()
+  files: misFiles[];
 
-
+  @Prop({ required: true })
   ofert: string;
 
-
+  @Prop({ required: true })
   email: string;
 
-
+  @Prop({ required: true })
   phone: string;
 
-
+  @Prop({ required: true })
   parking: string;
 
-
-  flower: string
-
-
+  @Prop({ required: true })
   neighborhood: string;
 
-
+  @Prop({ required: true })
   country: string;
 
-
+  @Prop({ required: true })
   city: string;
 
-
+  @Prop({ required: true })
   property: string;
 
-
+  @Prop({ required: true })
   stratum: string;
 
-
+  @Prop({ required: true })
   price: number;
 
-
+  @Prop({ required: true })
   room: string;
 
-
+  @Prop({ required: true })
   restroom: string;
 
-
+  @Prop({ required: true })
   age: string;
 
-
+  @Prop({ required: true })
   administration: string;
 
-
+  @Prop({ required: true })
   area: number;
 
-
+  @Prop({ required: true })
   description: string;
 
-  @Prop({ type: [FileSchema] }) 
-  file: CustomFile[];
 
 }
 

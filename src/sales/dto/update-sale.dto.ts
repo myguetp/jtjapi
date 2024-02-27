@@ -24,8 +24,6 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
   @IsNotEmpty()
   parking: string;
   
-  flower: string
-
   @IsNotEmpty()
   neighborhood: string;
 

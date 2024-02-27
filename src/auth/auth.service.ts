@@ -72,7 +72,7 @@ export class AuthService {
       throw new NotFoundException(`User with ID ${userId} not found`);
     }
   
-    await this.salesService.create(createSaleDto);
+    await this.salesService.uploadFiles(createSaleDto);
   
     user.sales.push(createSaleDto);
     await user.save();

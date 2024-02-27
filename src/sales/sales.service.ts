@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { CreateSaleDto, CustomFile } from './dto/create-sale.dto';
+import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Sales, SalesDocument } from './shema/sales.shema';
@@ -12,15 +12,98 @@ export class SalesService {
     @InjectModel(Sales.name) private salesModule: Model<SalesDocument>,
   ) {}
 
-  async create(createSaleDto: CreateSaleDto): Promise<SalesDocument> {
-    const fileData = createSaleDto.file ? createSaleDto.file : null;
-    console.log('filee data', fileData);
+  async uploadFiles(
+    createSaleDto: CreateSaleDto,
+  ): Promise<{
+    files: {
+      originalname: string;
+      filename: string;
+      mimetype: string;
+      size: number;
+      _id: string;
+      __v: number;
+    }[];
+        ofert: string;
+        email: string;
+        phone: string;
+        parking: string;
+        neighborhood: string;
+        country: string;
+        city: string;
+        property: string;
+        stratum: string;
+        price: number;
+        room: string;
+        restroom: string;
+        age:string;
+        administration: string;
+        area: number;
+        description: string;
+  }> {
+    try {
+      const filesData = createSaleDto.files.map((file) => ({
+        originalname: file.originalname,
+        filename: file.originalname,
+        mimetype: file.mimetype,
+        size: file.size,
+        buffer: file.buffer,
+      }));
   
-    const sale = new this.salesModule({ ...createSaleDto, file: fileData });
-    console.log('salee dataa', sale);
+      const saleInstance = new this.salesModule({
+        files: filesData,
+        ofert: createSaleDto.ofert,
+        email: createSaleDto.email,
+        phone: createSaleDto.phone,
+        parking: createSaleDto.parking,
+        neighborhood: createSaleDto.neighborhood,
+        country: createSaleDto.country,
+        city: createSaleDto.city,
+        property: createSaleDto.property,
+        stratum: createSaleDto.stratum,
+        price: createSaleDto.price,
+        room: createSaleDto.room,
+        restroom: createSaleDto.restroom,
+        age: createSaleDto.age,
+        administration: createSaleDto.administration,
+        area: createSaleDto.area,
+        description: createSaleDto.description
+      });
   
-    const createdSale = await sale.save();
-    return createdSale;
+      const savedSale = await saleInstance.save();
+  
+      return {
+        files: savedSale.files.map((file) => ({
+          originalname: file.originalname,
+          filename: file.filename,
+          mimetype: file.mimetype,
+          size: file.size,
+          _id: file._id,
+          __v: file.__v,
+        })),
+        ofert: savedSale.ofert,
+        email: savedSale.email,
+        phone: savedSale.phone,
+        parking: savedSale.parking,
+        neighborhood: savedSale.neighborhood,
+        country: savedSale.country,
+        city: savedSale.city,
+        property: savedSale.property,
+        stratum: savedSale.stratum,
+        price: savedSale.price,
+        room: savedSale.room,
+        restroom: savedSale.restroom,
+        age: savedSale.age,
+        administration: savedSale.administration,
+        area: savedSale.area,
+        description: savedSale.description
+      };
+    } catch (error) {
+      console.error(error);
+      throw new Error(
+        'Error al guardar los archivos en la base de datos. Detalles: ' +
+          error.message,
+      );
+    }
   }
 
   async findAllByAllMethods(

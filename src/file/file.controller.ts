@@ -4,13 +4,32 @@ import { FileService } from './file.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { CreateFileDto } from './dto/create-file.dto';
 import { CreateCommerceDto } from './dto/create-commerce.dto';
+import { diskStorage } from 'multer';
 
 @Controller('files')
 export class FileController {
   constructor(private readonly fileService: FileService) {}
 
   @Post('uploads')
-  @UseInterceptors(FilesInterceptor('files'))
+  @UseInterceptors(FilesInterceptor('files', 10, {
+    storage: diskStorage({
+      destination: (req, file, cb) => {
+        cb(null, './uploads'); // Specify your upload directory
+      },
+      filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const originalnameWithoutExtension = file.originalname.split('.').slice(0, -1).join('.');
+        const filename = `${originalnameWithoutExtension}-${uniqueSuffix}.${file.originalname.split('.').pop()}`;
+        cb(null, filename);
+      },
+    }),
+    fileFilter: (req, file, cb) => {
+      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        return cb(new HttpException('Only JPG or PNG files are allowed', HttpStatus.BAD_REQUEST), false);
+      }
+      cb(null, true);
+    },
+  }))
   async uploadFiles(@UploadedFiles() files: Express.Multer.File[], @Body() body: CreateCommerceDto) {
     try {
       if (!files || files.length === 0) {

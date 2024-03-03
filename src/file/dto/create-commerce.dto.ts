@@ -12,5 +12,7 @@ export class CreateCommerceDto {
   phoneNum: string
   @IsString()
   typeService: string
+  @IsString()
+  descripton: string
   
 }

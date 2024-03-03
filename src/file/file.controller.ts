@@ -13,23 +13,23 @@ export class FileController {
   @Post('uploads')
   @UseInterceptors(FilesInterceptor('files', 10, {
     storage: diskStorage({
-      destination: (req, file, cb) => {
-        cb(null, './uploads'); // Specify your upload directory
-      },
-      filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const originalnameWithoutExtension = file.originalname.split('.').slice(0, -1).join('.');
-        const filename = `${originalnameWithoutExtension}-${uniqueSuffix}.${file.originalname.split('.').pop()}`;
-        cb(null, filename);
-      },
+        destination: (req, file, cb) => {
+            cb(null, './uploads'); 
+        },
+        filename: (req, file, cb) => {
+            const originalnameWithoutExtension = file.originalname.split('.').slice(0, -1).join('.');
+            const filename = `${originalnameWithoutExtension}.${file.originalname.split('.').pop()}`;
+            console.log({ filename });
+            cb(null, filename);
+        },
     }),
     fileFilter: (req, file, cb) => {
-      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-        return cb(new HttpException('Only JPG or PNG files are allowed', HttpStatus.BAD_REQUEST), false);
-      }
-      cb(null, true);
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new HttpException('Solo se permiten archivos JPG o PNG', HttpStatus.BAD_REQUEST), false);
+        }
+        cb(null, true);
     },
-  }))
+}))
   async uploadFiles(@UploadedFiles() files: Express.Multer.File[], @Body() body: CreateCommerceDto) {
     try {
       if (!files || files.length === 0) {
@@ -43,6 +43,7 @@ export class FileController {
         maill: body.maill,
         phoneNum: body.phoneNum,
         typeService: body.typeService,
+        descripton: body.descripton,
       };
   
       const response = await this.fileService.uploadFiles(createFileDto);
@@ -61,6 +62,7 @@ export class FileController {
         maill: response.maill,
         phoneNum: response.phoneNum,
         typeService: response.typeService,
+        descripton: response.descripton,
       }];
   
       return formattedResponse;

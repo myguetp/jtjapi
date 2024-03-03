@@ -32,6 +32,9 @@ export class File {
 
   @Prop({ required: true })
   typeService: string;
+
+  @Prop({ required: true })
+  descripton: string;
 }
 
 

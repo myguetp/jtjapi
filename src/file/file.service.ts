@@ -25,6 +25,7 @@ export class FileService {
     maill: string;
     phoneNum: string;
     typeService: string;
+    descripton: string
   }> {
     try {
       const filesData = createFileDto.files.map((file) => ({
@@ -42,6 +43,7 @@ export class FileService {
         maill: createFileDto.maill,
         phoneNum: createFileDto.phoneNum,
         typeService: createFileDto.typeService,
+        descripton: createFileDto.descripton,
       });
   
       const savedFile = await fileInstance.save();
@@ -60,6 +62,7 @@ export class FileService {
         maill: savedFile.maill,
         phoneNum: savedFile.phoneNum,
         typeService: savedFile.typeService,
+        descripton: savedFile.descripton
       };
     } catch (error) {
       console.error(error);

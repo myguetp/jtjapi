@@ -5,6 +5,7 @@ import { UpdateSaleDto } from './dto/update-sale.dto';
 import { FilesInterceptor } from '@nestjs/platform-express/multer/interceptors/files.interceptor';
 import { CreateVenteDto } from './dto/create-vente.dto';
 import { CreateSaleDto } from './dto/create-sale.dto';
+import { diskStorage } from 'multer';
 
 
 @Controller('sales')
@@ -12,7 +13,25 @@ export class SalesController {
   constructor(private readonly salesService: SalesService) {}
 
   @Post('uploadcrate')
-  @UseInterceptors(FilesInterceptor('files'))
+  @UseInterceptors(FilesInterceptor('files', 10, {
+    storage: diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, './uploads'); 
+        },
+        filename: (req, file, cb) => {
+            const originalnameWithoutExtension = file.originalname.split('.').slice(0, -1).join('.');
+            const filename = `${originalnameWithoutExtension}.${file.originalname.split('.').pop()}`;
+            console.log({ filename });
+            cb(null, filename);
+        },
+    }),
+    fileFilter: (req, file, cb) => {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new HttpException('Solo se permiten archivos JPG o PNG', HttpStatus.BAD_REQUEST), false);
+        }
+        cb(null, true);
+    },
+}))
   async uploadFiles(@UploadedFiles() files: Express.Multer.File[], @Body() body: CreateVenteDto) {
     try {
       if (!files || files.length === 0) {

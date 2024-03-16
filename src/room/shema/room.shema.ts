@@ -11,7 +11,6 @@ export class Room {
 
   @Prop()
   name: string;
-
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);

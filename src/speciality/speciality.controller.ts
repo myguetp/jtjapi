@@ -1,10 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { SpecialityService } from './speciality.service';
 import { CreateSpecialityDto } from './dto/create-speciality.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -23,5 +18,4 @@ export class SpecialityController {
   findAll() {
     return this.specialityService.findAll();
   }
-
 }

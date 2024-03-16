@@ -15,6 +15,6 @@ import { Interested, InterestedSchema } from './shema/interested.shema';
     ]),
   ],
   controllers: [InterestedController],
-  providers: [InterestedService]
+  providers: [InterestedService],
 })
 export class InterestedModule {}

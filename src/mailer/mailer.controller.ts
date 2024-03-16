@@ -11,10 +11,10 @@ export class MailerController {
   async sendMail() {
     const dto: SendEmailDto = {
       from: { name: 'Complexes', address: 'complexes@example.com' },
-      recipients: [{ name: 'jhon Doe', address: 'john@example.com'}],
+      recipients: [{ name: 'jhon Doe', address: 'john@example.com' }],
       subject: 'Lucky winner',
-      html: '<p>hi this is a new <strong>colombia</strong></p>'
-    }
+      html: '<p>hi this is a new <strong>colombia</strong></p>',
+    };
     return await this.mailerService.sendEmail(dto);
   }
 }

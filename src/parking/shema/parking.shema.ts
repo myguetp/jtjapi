@@ -11,9 +11,6 @@ export class Parking {
 
   @Prop()
   name: string;
-
-
- 
 }
 
 export const ParkingSchema = SchemaFactory.createForClass(Parking);

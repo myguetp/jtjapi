@@ -25,7 +25,6 @@ export class LeasesService {
     }
   }
 
-
   async findAll() {
     const list = await this.leasesModule.find({});
     return list;
@@ -41,26 +40,26 @@ export class LeasesService {
     minPrice?: number,
     maxPrice?: number,
     minArea?: number,
-    maxArea?: number
+    maxArea?: number,
   ) {
     const query: any = {};
-  
+
     if (stratum !== undefined) {
       query.stratum = stratum;
     }
-  
+
     if (room !== undefined) {
       query.room = room;
     }
-  
+
     if (restroom !== undefined) {
       query.restroom = restroom;
     }
-  
+
     if (age !== undefined) {
       query.age = age;
     }
-    
+
     if (parking !== undefined) {
       query.parking = parking;
     }
@@ -68,12 +67,11 @@ export class LeasesService {
     if (property !== undefined) {
       query.property = property;
     }
-  
-    
+
     if (minPrice !== undefined) {
       query.price = { $gte: minPrice };
     }
-  
+
     if (maxPrice !== undefined) {
       if (query.price) {
         query.price.$lte = maxPrice;
@@ -104,7 +102,10 @@ export class LeasesService {
   }
 
   async update(_id: string, updateLeaseDto: UpdateLeaseDto) {
-    const update = await this.leasesModule.findByIdAndUpdate(_id, updateLeaseDto);
+    const update = await this.leasesModule.findByIdAndUpdate(
+      _id,
+      updateLeaseDto,
+    );
     return update;
   }
 

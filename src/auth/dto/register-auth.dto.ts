@@ -9,22 +9,24 @@ import { CreateFileDto } from 'src/file/dto/create-file.dto';
 export class RegisterAuthDto extends PartialType(LoginAuthDto) {
   @IsNotEmpty()
   name: string;
-  
+
   @IsNotEmpty()
   lastName: string;
-  
+
   @IsNotEmpty()
   city: string;
-  
+
   @IsNotEmpty()
   phone: string;
+
+  @IsNotEmpty()
+  termsConditions: string;
 
   @ValidateNested({ each: true })
   @Type(() => CreateSaleDto)
   sales: CreateSaleDto[];
-  
+
   @ValidateNested({ each: true })
   @Type(() => CreateFileDto)
   commerce: CreateFileDto[];
- 
 }

@@ -24,7 +24,7 @@ export class MailerService {
   }
 
   async sendEmail(dto: SendEmailDto) {
-    const {from, recipients, subject, html} = dto;
+    const { from, recipients, subject, html } = dto;
 
     const transport = this.mailTrasnport();
 
@@ -35,15 +35,15 @@ export class MailerService {
       },
       to: recipients,
       subject,
-      html
-    }
+      html,
+    };
 
     try {
       const result = await transport.sendMail(options);
 
       return result;
     } catch (error) {
-      console.log('Error mail:', error)
+      console.log('Error mail:', error);
     }
   }
 }

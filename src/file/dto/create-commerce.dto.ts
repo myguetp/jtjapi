@@ -3,16 +3,15 @@ import { IsString } from 'class-validator';
 
 export class CreateCommerceDto {
   @IsString()
-  names: string
+  names: string;
   @IsString()
-  contact: string
+  contact: string;
   @IsString()
-  maill: string
+  maill: string;
   @IsString()
-  phoneNum: string
+  phoneNum: string;
   @IsString()
-  typeService: string
+  typeService: string;
   @IsString()
-  descripton: string
-  
+  descripton: string;
 }

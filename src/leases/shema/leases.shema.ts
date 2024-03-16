@@ -20,7 +20,7 @@ export class Leases {
 
   @Prop()
   city: string;
-  
+
   @Prop()
   property: string;
 
@@ -49,7 +49,7 @@ export class Leases {
   description: string;
 
   @Prop([String])
-  file: string[]; 
+  file: string[];
 }
 
 export const LeasesSchema = SchemaFactory.createForClass(Leases);

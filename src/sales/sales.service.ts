@@ -12,9 +12,7 @@ export class SalesService {
     @InjectModel(Sales.name) private salesModule: Model<SalesDocument>,
   ) {}
 
-  async uploadFiles(
-    createSaleDto: CreateSaleDto,
-  ): Promise<{
+  async uploadFiles(createSaleDto: CreateSaleDto): Promise<{
     files: {
       originalname: string;
       filename: string;
@@ -23,22 +21,22 @@ export class SalesService {
       _id: string;
       __v: number;
     }[];
-        ofert: string;
-        email: string;
-        phone: string;
-        parking: string;
-        neighborhood: string;
-        country: string;
-        city: string;
-        property: string;
-        stratum: string;
-        price: number;
-        room: string;
-        restroom: string;
-        age:string;
-        administration: string;
-        area: number;
-        description: string;
+    ofert: string;
+    email: string;
+    phone: string;
+    parking: string;
+    neighborhood: string;
+    country: string;
+    city: string;
+    property: string;
+    stratum: string;
+    price: number;
+    room: string;
+    restroom: string;
+    age: string;
+    administration: string;
+    area: number;
+    description: string;
   }> {
     try {
       const filesData = createSaleDto.files.map((file) => ({
@@ -48,7 +46,7 @@ export class SalesService {
         size: file.size,
         buffer: file.buffer,
       }));
-  
+
       const saleInstance = new this.salesModule({
         files: filesData,
         ofert: createSaleDto.ofert,
@@ -66,11 +64,11 @@ export class SalesService {
         age: createSaleDto.age,
         administration: createSaleDto.administration,
         area: createSaleDto.area,
-        description: createSaleDto.description
+        description: createSaleDto.description,
       });
-  
+
       const savedSale = await saleInstance.save();
-  
+
       return {
         files: savedSale.files.map((file) => ({
           originalname: file.originalname,
@@ -95,7 +93,7 @@ export class SalesService {
         age: savedSale.age,
         administration: savedSale.administration,
         area: savedSale.area,
-        description: savedSale.description
+        description: savedSale.description,
       };
     } catch (error) {
       console.error(error);
@@ -116,22 +114,22 @@ export class SalesService {
     minPrice?: number,
     maxPrice?: number,
     minArea?: number,
-    maxArea?: number
+    maxArea?: number,
   ) {
     const query: any = {};
-  
+
     if (stratum !== undefined) {
       query.stratum = stratum;
     }
-  
+
     if (room !== undefined) {
       query.room = room;
     }
-  
+
     if (restroom !== undefined) {
       query.restroom = restroom;
     }
-  
+
     if (age !== undefined) {
       query.age = age;
     }
@@ -143,13 +141,11 @@ export class SalesService {
     if (property !== undefined) {
       query.property = property;
     }
-  
-       
+
     if (minPrice !== undefined) {
       query.price = { $gte: minPrice };
     }
 
-  
     if (maxPrice !== undefined) {
       if (query.price) {
         query.price.$lte = maxPrice;

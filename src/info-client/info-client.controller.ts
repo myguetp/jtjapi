@@ -1,5 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { InfoClientService } from './info-client.service';
 import { CreateInfoClientDto } from './dto/create-info-client.dto';
 import { UpdateInfoClientDto } from './dto/update-info-client.dto';
@@ -24,7 +32,10 @@ export class InfoClientController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInfoClientDto: UpdateInfoClientDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateInfoClientDto: UpdateInfoClientDto,
+  ) {
     return this.infoClientService.update(+id, updateInfoClientDto);
   }
 

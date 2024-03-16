@@ -15,22 +15,21 @@ export class Cities {
 @Schema()
 export class Countries {
   @Prop()
-  id: number
+  id: number;
   @Prop()
-  indicative: string
+  indicative: string;
   @Prop()
-  nameCountry: string
+  nameCountry: string;
   @Prop()
-  nameCity: Cities[]
+  nameCity: Cities[];
 }
 
 @Schema()
 export class City {
-  
   @Prop()
-  continent: string
+  continent: string;
   @Prop()
-  country: Countries[]
+  country: Countries[];
 }
 
 export const CitySchema = SchemaFactory.createForClass(City);

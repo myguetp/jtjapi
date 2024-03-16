@@ -9,9 +9,7 @@ interface CustomFile {
   type: string;
 }
 
-
 export class UpdateSaleDto extends PartialType(CreateSaleDto) {
-  
   @IsNotEmpty()
   ofert: string;
 
@@ -23,7 +21,7 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
 
   @IsNotEmpty()
   parking: string;
-  
+
   @IsNotEmpty()
   neighborhood: string;
 
@@ -32,36 +30,35 @@ export class UpdateSaleDto extends PartialType(CreateSaleDto) {
 
   @IsNotEmpty()
   city: string;
-  
+
   @IsNotEmpty()
   property: string;
-  
+
   @IsNotEmpty()
   stratum: string;
-  
+
   @IsNotEmpty()
-  price: number
-  
+  price: number;
+
   @IsNotEmpty()
   room: string;
-  
+
   @IsNotEmpty()
   restroom: string;
-  
+
   @IsNotEmpty()
   age: string;
-  
+
   @IsNotEmpty()
   administration: string;
-  
+
   @IsNotEmpty()
   area: number;
-  
+
   @IsNotEmpty()
   description: string;
 
   @IsArray()
   @ValidateNested({ each: true })
   file: CustomFile[];
-  
 }

@@ -8,7 +8,8 @@ import { Speciality, SpecialityDocument } from './shema/specialite.shema';
 @Injectable()
 export class SpecialityService {
   constructor(
-    @InjectModel(Speciality.name) private specialityModule: Model<SpecialityDocument>,
+    @InjectModel(Speciality.name)
+    private specialityModule: Model<SpecialityDocument>,
   ) {}
 
   async create(createSpecialityDto: CreateSpecialityDto) {

@@ -11,7 +11,6 @@ export class Antiquity {
 
   @Prop()
   name: string;
-
 }
 
 export const AntiquitySchema = SchemaFactory.createForClass(Antiquity);

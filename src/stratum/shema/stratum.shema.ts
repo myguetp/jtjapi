@@ -11,7 +11,6 @@ export class Stratum {
 
   @Prop()
   name: string;
-
 }
 
 export const StratumSchema = SchemaFactory.createForClass(Stratum);

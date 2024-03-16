@@ -11,7 +11,6 @@ export class Speciality {
 
   @Prop()
   name: string;
-
 }
 
 export const SpecialitySchema = SchemaFactory.createForClass(Speciality);

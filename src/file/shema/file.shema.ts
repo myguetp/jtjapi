@@ -37,5 +37,4 @@ export class File {
   descripton: string;
 }
 
-
 export const FileSchema = SchemaFactory.createForClass(File);

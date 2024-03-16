@@ -24,23 +24,27 @@ export class AuthController {
 
   @Post('register')
   registerUser(@Body() userObject: RegisterAuthDto) {
-    
     return this.authService.register(userObject);
   }
 
-  @Post(':_id/sales') 
-  addSaleToUser(@Param('_id') userId: string, @Body() createSaleDto: CreateSaleDto) {
+  @Post(':_id/sales')
+  addSaleToUser(
+    @Param('_id') userId: string,
+    @Body() createSaleDto: CreateSaleDto,
+  ) {
     return this.authService.addSaleToUser(userId, createSaleDto);
   }
 
   @Post(':_id/commerce')
-  addCommerceToUser(@Param('_id') userId: string, @Body() createFileDto: CreateFileDto ) {
+  addCommerceToUser(
+    @Param('_id') userId: string,
+    @Body() createFileDto: CreateFileDto,
+  ) {
     return this.authService.addCommerceToUser(userId, createFileDto);
   }
 
   @Post('login')
-  loginUser(@Body() userObjectLogin: LoginAuthDto){
-    return this.authService.login(userObjectLogin)
+  loginUser(@Body() userObjectLogin: LoginAuthDto) {
+    return this.authService.login(userObjectLogin);
   }
-
 }

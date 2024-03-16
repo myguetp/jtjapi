@@ -75,7 +75,7 @@ export class LeasesController {
       room,
       restroom,
       age,
-      parking, 
+      parking,
       property,
       minPrice,
       maxPrice,

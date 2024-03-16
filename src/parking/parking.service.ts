@@ -11,8 +11,8 @@ export class ParkingService {
   constructor(
     @InjectModel(Parking.name) private parkingModule: Model<ParkingDocument>,
   ) {}
-  
- async create(parkingModule: CreateParkingDto) {
+
+  async create(parkingModule: CreateParkingDto) {
     const ofertCrate = await this.parkingModule.create(parkingModule);
     return ofertCrate;
   }

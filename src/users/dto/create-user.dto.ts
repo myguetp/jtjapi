@@ -23,6 +23,9 @@ export class CreateUserDto {
   @IsNotEmpty()
   password: string;
 
+  @IsNotEmpty()
+  termsConditions: string;
+
   @ValidateNested({ each: true })
   sales: CreateSaleDto[];
 

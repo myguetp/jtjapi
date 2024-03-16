@@ -16,15 +16,15 @@ export class CreateVenteDto {
 
   @IsString()
   parking: string;
- 
+
   @IsNotEmpty()
   @IsString()
   neighborhood: string;
-  
+
   @IsNotEmpty()
   @IsString()
   country: string;
-  
+
   @IsNotEmpty()
   @IsString()
   city: string;
@@ -32,31 +32,30 @@ export class CreateVenteDto {
   @IsNotEmpty()
   @IsString()
   property: string;
-  
+
   @IsString()
   stratum: string;
-  
+
   @IsNotEmpty()
   @IsNumber()
-  price: number
+  price: number;
 
   @IsString()
   room: string;
- 
+
   @IsString()
   restroom: string;
 
   @IsNotEmpty()
   age: string;
- 
+
   @IsString()
   administration: string;
-  
+
   @IsNotEmpty()
   @IsNumber()
   area: number;
 
   @IsString()
   description: string;
-  
 }

@@ -19,10 +19,13 @@ export class User {
   @Prop()
   password: string;
 
- @Prop({ type: [{ type: Object }] })
+  @Prop()
+  termsConditions: string;
+
+  @Prop({ type: [{ type: Object }] })
   sales: object[];
 
-  @Prop({ type: [{ type: Object }] })  
+  @Prop({ type: [{ type: Object }] })
   commerce: object[];
 }
 

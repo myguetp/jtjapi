@@ -11,7 +11,6 @@ export class PropertyType {
 
   @Prop()
   name: string;
-
 }
 
 export const PropertyTypeSchema = SchemaFactory.createForClass(PropertyType);

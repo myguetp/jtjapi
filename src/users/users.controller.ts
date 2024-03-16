@@ -1,5 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -16,12 +24,18 @@ export class UsersController {
   }
 
   @Post(':id/sales') // Endpoint para agregar una venta a un usuario
-  addSaleToUser(@Param('id') userId: string, @Body() createSaleDto: CreateSaleDto) {
+  addSaleToUser(
+    @Param('id') userId: string,
+    @Body() createSaleDto: CreateSaleDto,
+  ) {
     return this.usersService.addSaleToUser(+userId, createSaleDto);
   }
 
   @Post(':id/commerce')
-  addCommerceToUser(@Param('_id') userId: string, @Body() createFileDto: CreateFileDto ) {
+  addCommerceToUser(
+    @Param('_id') userId: string,
+    @Body() createFileDto: CreateFileDto,
+  ) {
     return this.usersService.addCommerceToUser(userId, createFileDto);
   }
 

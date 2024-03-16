@@ -65,8 +65,6 @@ export class Sales {
 
   @Prop({ required: true })
   description: string;
-
-
 }
 
 export const SalesSchema = SchemaFactory.createForClass(Sales);

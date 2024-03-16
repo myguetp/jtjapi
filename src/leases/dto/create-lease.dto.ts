@@ -10,10 +10,9 @@ export class File {
 }
 
 export class CreateLeaseDto {
-  
   @IsNotEmpty()
   ofert: string;
-  
+
   @IsNotEmpty()
   parking: string;
 
@@ -25,41 +24,40 @@ export class CreateLeaseDto {
 
   @IsNotEmpty()
   city: string;
-  
+
   @IsNotEmpty()
   property: string;
-  
+
   @IsNotEmpty()
   stratum: string;
-  
- 
+
   @IsNotEmpty()
-  price: number
+  price: number;
 
   @IsNotEmpty()
   room: string;
-  
+
   @IsNotEmpty()
   restroom: string;
-  
+
   @IsNotEmpty()
   age: string;
-  
+
   @IsNotEmpty()
   administration: string;
-  
+
   @IsNotEmpty()
   area: number;
-  
+
   @IsNotEmpty()
   description: string;
-  
+
   @IsNotEmpty()
   createdAt: number = Date.now();
-  
+
   @IsNotEmpty()
   finnallyAt: number = Date.now() + 60 * 24 * 60 * 60 * 1000;
-  
+
   @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })

@@ -11,7 +11,6 @@ export class Restroom {
 
   @Prop()
   name: string;
-
 }
 
 export const RestroomSchema = SchemaFactory.createForClass(Restroom);

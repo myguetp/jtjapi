@@ -17,7 +17,6 @@ export class InfoClient {
 
   @Prop()
   cellphone: string;
- 
 }
 
 export const InfoClientSchema = SchemaFactory.createForClass(InfoClient);

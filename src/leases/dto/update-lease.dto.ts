@@ -4,7 +4,6 @@ import { CreateLeaseDto } from './create-lease.dto';
 import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
-
 export class File {
   fieldname: string;
   originalname: string;
@@ -13,13 +12,12 @@ export class File {
 }
 
 export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {
- 
   @IsNotEmpty()
   ofert: string;
 
   @IsNotEmpty()
   parking: string;
-  
+
   @IsNotEmpty()
   neighborhood: string;
 
@@ -28,41 +26,40 @@ export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {
 
   @IsNotEmpty()
   city: string;
-  
-  
+
   @IsNotEmpty()
   property: string;
-  
+
   @IsNotEmpty()
   stratum: string;
-  
+
   @IsNotEmpty()
-  price: number
-  
+  price: number;
+
   @IsNotEmpty()
   room: string;
-  
+
   @IsNotEmpty()
   restroom: string;
-  
+
   @IsNotEmpty()
   age: string;
-  
+
   @IsNotEmpty()
   administration: string;
-  
+
   @IsNotEmpty()
   area: number;
-  
+
   @IsNotEmpty()
   description: string;
-  
+
   @IsNotEmpty()
   createdAt: number = Date.now();
-  
+
   @IsNotEmpty()
   finnallyAt: number = Date.now() + 60 * 24 * 60 * 60 * 1000;
-  
+
   @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })

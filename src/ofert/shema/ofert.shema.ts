@@ -11,7 +11,6 @@ export class Ofert {
 
   @Prop()
   name: string;
-
 }
 
 export const OfertSchema = SchemaFactory.createForClass(Ofert);

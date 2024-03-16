@@ -7,11 +7,10 @@ export class CreateInfoClientDto {
 
   @IsNotEmpty()
   name: string;
-  
+
   @IsNotEmpty()
   emailClient: string;
-  
+
   @IsNotEmpty()
   cellphone: string;
-  
 }

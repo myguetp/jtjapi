@@ -27,7 +27,6 @@ import { FileSchema } from 'src/file/shema/file.shema';
         schema: FileSchema,
       },
     ]),
-    
   ],
   controllers: [UsersController],
   providers: [UsersService],

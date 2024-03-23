@@ -75,12 +75,10 @@ export class FileController {
 
   @Get('byAllData')
   findAllByAllMethods(
-  @Query('names') names?: string,
-  @Query('contact') contact?: string,
-  @Query('typeService') typeService?: string,
-
-) {
-  return this.fileService.findAllByAllMethods(names, contact, typeService);
-}
-
+    @Query('names') names?: string,
+    @Query('contact') contact?: string,
+    @Query('typeService') typeService?: string,
+  ) {
+    return this.fileService.findAllByAllMethods(names, contact, typeService, 'asc');
+  }
 }

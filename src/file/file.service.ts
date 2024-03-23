@@ -77,6 +77,7 @@ export class FileService {
     names?: string,
     contact?: string,
     typeService?: string,
+    sortOrder: 'asc' | 'desc' = 'desc',
   ) {
     const query: any = {};
   
@@ -94,7 +95,10 @@ export class FileService {
   
    
 
-    const list = await this.fileModel.find(query).exec();
+    const list = await this.fileModel
+      .find(query)
+      .sort({ createdAt: sortOrder === 'asc' ? -1 : 1 }) 
+      .exec();
     return list;
   }
 }
